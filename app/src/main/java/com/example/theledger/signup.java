@@ -58,16 +58,18 @@ public class signup extends AppCompatActivity {
                 user.put("Phone",Phone);
                 user.put("Pin",Pin);
 
+                // will store the data in the database having Aadhar as the unique id which will identify the records....
                 db.collection("users").document(Aadhar).set(user).addOnSuccessListener(documentReference -> {
                             Toast.makeText(getApplicationContext(),"User Added Successfully",Toast.LENGTH_SHORT).show();
-
                             // resetting the Entry field after the registration....
                             name.setText("");
                             aadhar.setText("");
                             phone.setText("");
                             pin.setText("");
                             progress.setVisibility(View.GONE);
-
+                            Intent backtoChoose = new Intent(signup.this , chooseLoginSignup.class);
+                            startActivity(backtoChoose);
+                            finish();
                         })
                         .addOnFailureListener(documentReference -> {
                             Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();});
