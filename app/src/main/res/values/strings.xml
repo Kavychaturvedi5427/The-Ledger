@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">The Ledger</string>
+    <string name="splash_introText">The Ledger</string>
+    <string name="splashTagline">Your Finances, Simplified.</string>
+    <string name="copyright">© 2025 The Ledger</string>
+    <string name="devtag_splash">Developed By Kavy Chaturvedi.</string>
+    <string name="EnterDetailsLogin">Enter details to continue :</string>
+    <string name="Welcome">Welcome to The Ledger</string>
+    <string name="nameLogin">Name:</string>
+    <string name="LoginSubtext">Secure PIN Login to Your Account</string>
+    <string name="PinInput">Enter 4-digit PIN</string>
+    <string name="loginBtn">Already a customer? \n Login</string>
+    <string name="signUpBtn">New Customer? \n sign up</string>
+    <string name="Forget_pintxt">Forgor your PIN? Reset Here!</string>
+    <string name="new_pin">Please enter your new 4-digit PIN</string>
+    <string name="ConfirmationPin">Re-enter to confirm</string>
+    <string name="home">Home</string>
+    <string name="transaction">Transaction</string>
+    <string name="analytics">Analytics</string>
+    <string name="profile">Profile</string>
+
+</resources>

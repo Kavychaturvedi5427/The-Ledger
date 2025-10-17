@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mainimg"
+            android:layout_width="155dp"
+            android:layout_height="153dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/Maintext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mainimg"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="2dp"
+            android:fontFamily="@font/lexend"
+            android:text="@string/splash_introText"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Maintext"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="2dp"
+            android:fontFamily="@font/cavet"
+            android:text="@string/splashTagline"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/tagline"
+            android:layout_centerHorizontal="true"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
+
+        <!-- Bottom section: copyright + dev tag -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/copyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/lexend"
+                android:text="@string/copyright"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/lexend"
+                android:text="v1.0.0"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/devTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/lexend"
+                android:text="@string/devtag_splash"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
