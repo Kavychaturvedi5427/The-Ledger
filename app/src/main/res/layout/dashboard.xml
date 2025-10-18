@@ -5,7 +5,7 @@
     android:background="@drawable/background_gradient"
     android:fitsSystemWindows="true">
 
-    <!-- Username TextView positioned at the top -->
+    <!-- Username text -->
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
@@ -17,13 +17,13 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
-    <!-- Scrollable Content below username -->
+    <!-- Scrollable content -->
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/username"
-        android:layout_above="@id/navigationCard"
+        android:layout_above="@id/navbarShadowContainer"
         android:fillViewport="true"
         android:padding="8dp">
 
@@ -31,148 +31,160 @@
             android:id="@+id/MainContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <!-- Other content can go here -->
-
         </RelativeLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Card (single instance) -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/navigationCard"
+    <!-- Shadow container for bottom navbar -->
+    <RelativeLayout
+        android:id="@+id/navbarShadowContainer"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="12dp">
+        android:background="@drawable/navbar_shadow_bg">
 
-        <LinearLayout
-            android:id="@+id/navBar"
+        <!-- Bottom Navigation Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/navigationCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="12dp"
-            android:weightSum="4">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="25dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="20dp">
 
-            <!-- Home -->
             <LinearLayout
-                android:id="@+id/homeBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
+                android:id="@+id/navBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:weightSum="4">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/homeBtn"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="@string/home"
-                    android:src="@drawable/home"
-                    app:strokeWidth="0dp" />
+                <!-- Home Button -->
+                <LinearLayout
+                    android:id="@+id/homeBtnLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/home"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/homeBtn"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="@string/home"
+                        android:src="@drawable/home"
+                        app:strokeWidth="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/home"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Transaction Button -->
+                <LinearLayout
+                    android:id="@+id/transacBtnLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/transacBtn"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="@string/transaction"
+                        android:src="@drawable/transaction"
+                        app:strokeWidth="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/transaction"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Analytics Button -->
+                <LinearLayout
+                    android:id="@+id/analyBtnLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/analy_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="@string/analytics"
+                        android:src="@drawable/analysis"
+                        app:strokeWidth="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/analytics"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Profile Button -->
+                <LinearLayout
+                    android:id="@+id/profBtnLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/prof_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="@string/profile"
+                        android:src="@drawable/user"
+                        app:strokeWidth="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/profile"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
-
-            <!-- Transactions -->
-            <LinearLayout
-                android:id="@+id/transacBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/transacBtn"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="@string/transaction"
-                    android:src="@drawable/transaction"
-                    app:strokeWidth="0dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/transaction"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Analytics -->
-            <LinearLayout
-                android:id="@+id/analyBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/analy_btn"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="@string/analytics"
-                    android:src="@drawable/analysis"
-                    app:strokeWidth="0dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/analytics"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Profile -->
-            <LinearLayout
-                android:id="@+id/profBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/prof_btn"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="@string/profile"
-                    android:src="@drawable/user"
-                    app:strokeWidth="0dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/profile"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,7 +1,10 @@
 package com.example.theledger;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -14,6 +17,8 @@ public class chooseLoginSignup extends AppCompatActivity {
 
         AppCompatButton login = findViewById(R.id.loginBTN);
         AppCompatButton signup = findViewById(R.id.signupbtn);
+        ImageView exit = findViewById(R.id.exit);
+
 
         login.setOnClickListener(v -> {
             Intent move_toLogin = new Intent(chooseLoginSignup.this, Login.class);
@@ -24,5 +29,14 @@ public class chooseLoginSignup extends AppCompatActivity {
             Intent move_toSignup = new Intent(chooseLoginSignup.this, signup.class);
             startActivity(move_toSignup);
         });
+
+        exit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+                System.exit(0);
+            }
+        });
+
     }
 }

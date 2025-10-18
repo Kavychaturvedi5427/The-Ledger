@@ -21,11 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="15dp"
-            app:cardElevation="9dp">
+            app:cardElevation="9dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mainimg"
@@ -70,6 +72,16 @@
                     android:background="@color/blue"
                     android:padding="4dp"
                     android:text="@string/signUpBtn" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/exit"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/userexit"
+                    android:layout_below="@id/signupbtn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="10dp"
+                    />
 
 
             </RelativeLayout>

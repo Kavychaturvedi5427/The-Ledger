@@ -1,24 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme for Light Mode -->
-    <style name="Theme.TheLedger" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color -->
+    <style name="Theme.TheLedger" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
         <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryVariant">#A2D5C6</item>
         <item name="colorOnPrimary">#F6F6F6</item>
 
-        <!-- Secondary brand color -->
         <item name="colorSecondary">#CFFFE2</item>
         <item name="colorSecondaryVariant">#A2D5C6</item>
         <item name="colorOnSecondary">#000000</item>
 
-        <!-- Text color -->
         <item name="android:textColor">@color/gray</item>
 
-        <!-- Background color -->
         <item name="android:colorBackground">#F6F6F6</item>
+        <item name="colorSurface">#1E1E1E</item>
+        <item name="colorOnSurface">#FFFFFF</item>
 
-        <!-- Status and navigation bars -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="l">true</item>
+
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+        <item name="android:navigationBarColor" tools:targetApi="l">@android:color/transparent</item>
+
     </style>
 </resources>

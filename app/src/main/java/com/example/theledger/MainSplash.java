@@ -22,7 +22,7 @@ public class MainSplash extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_left,R.anim.slide_right);
                 finish();
             }
-        },4000);
+        },3975);
 
         // fade and zoom animation on the main logo
         Animation logoAnim = AnimationUtils.loadAnimation(this , R.anim.fade_zoom);

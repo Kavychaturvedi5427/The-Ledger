@@ -29,6 +29,11 @@ public class DashBoard extends AppCompatActivity {
             if (documentSnapshot.exists()) {
                 String name = documentSnapshot.getString("Name");
                 username.setText("Welcome, " + name);
+
+
+
+//                db.collection("users").document(a_id).set()
+
             } else {
                 Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
             }
