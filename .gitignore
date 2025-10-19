@@ -1,6 +1,4 @@
-# -------------------------
 # Android Studio / IntelliJ
-# -------------------------
 *.iml
 .idea/
 .idea/caches/
@@ -10,38 +8,28 @@
 .idea/navEditor.xml
 .idea/assetWizardSettings.xml
 
-# -------------------------
 # Gradle
-# -------------------------
 .gradle/
 build/
+app/build/
 
-# -------------------------
-# Local Configuration (Do NOT upload these)
-# -------------------------
+# Local configuration
 local.properties
 /local.properties
 
-# -------------------------
-# Firebase / Google Services
-# -------------------------
+# Firebase config
 app/google-services.json
 /google-services.json
 **/google-services.json
 
-# -------------------------
-# Native Build Artifacts
-# -------------------------
+# Native builds
 .externalNativeBuild/
 .cxx/
 
-# -------------------------
 # Captures
-# -------------------------
 captures/
 
-# -------------------------
-# OS / System Files
-# -------------------------
+# OS / system files
 .DS_Store
 Thumbs.db
+
