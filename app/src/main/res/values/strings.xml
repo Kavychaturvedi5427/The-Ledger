@@ -18,5 +18,6 @@
     <string name="transaction">Transaction</string>
     <string name="analytics">Analytics</string>
     <string name="profile">Profile</string>
+    <string name="Balance">Your Balance</string>
 
 </resources>

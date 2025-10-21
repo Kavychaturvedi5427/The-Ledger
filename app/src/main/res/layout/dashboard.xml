@@ -5,57 +5,201 @@
     android:background="@drawable/background_gradient"
     android:fitsSystemWindows="true">
 
-    <!-- Username text -->
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/lexend"
-        android:text="Welcome, User!"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
     <!-- Scrollable content -->
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/username"
         android:layout_above="@id/navbarShadowContainer"
         android:fillViewport="true"
         android:padding="8dp">
 
+
         <RelativeLayout
-            android:id="@+id/MainContent"
+            android:id="@+id/MainScrollContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/lexend"
+                android:text="Welcome, User!"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <!-- Balance + Expense container -->
+            <LinearLayout
+                android:id="@+id/balanceExpenseContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- Balance section -->
+                <LinearLayout
+                    android:id="@+id/balanceSection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:text="@string/Balance"
+                        android:textSize="24sp"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/balance1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/lexend"
+                        android:text="₹10,000"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <!-- Vertical separator -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="50dp"
+                    android:background="@color/black"
+                    android:layout_marginHorizontal="10dp" />
+
+                <!-- Expense section -->
+                <LinearLayout
+                    android:id="@+id/expenseSection"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/expensesLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:text="Expenses"
+                        android:textSize="24sp"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/expensesValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/lexend"
+                        android:text="₹ 0"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Add Balance / Expense Buttons -->
+            <RelativeLayout
+                android:id="@+id/BtnOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/balanceExpenseContainer"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:id="@+id/addBalancell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <ImageView
+                        android:id="@+id/AddBalanceimg"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/balanceadd"
+                        android:contentDescription="AddBalance" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Add Balance"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/addexpnsell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addBalancell"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <ImageView
+                        android:id="@+id/AddExpense"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/minus" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Expense"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <!-- Separator line below Expense -->
+                <View
+                    android:id="@+id/optionSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/addexpnsell"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/black" />
+            </RelativeLayout>
+
+            <!-- Placeholder for main dashboard content -->
+            <RelativeLayout
+                android:id="@+id/MainContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/BtnOption"
+                android:layout_marginTop="10dp" />
         </RelativeLayout>
     </ScrollView>
 
-    <!-- Shadow container for bottom navbar -->
+    <!-- Bottom navbar with shadow -->
     <RelativeLayout
         android:id="@+id/navbarShadowContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/navbar_shadow_bg">
+        android:background="@drawable/shadow_bg">
 
-        <!-- Bottom Navigation Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/navigationCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="25dp"
-            app:cardUseCompatPadding="true"
-            app:cardPreventCornerOverlap="false"
-            app:cardElevation="20dp">
+            app:cardElevation="20dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:id="@+id/navBar"
@@ -64,17 +208,15 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingHorizontal="12dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
+                android:paddingVertical="12dp"
                 android:weightSum="4">
 
-                <!-- Home Button -->
+                <!-- Home -->
                 <LinearLayout
                     android:id="@+id/homeBtnLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
@@ -84,26 +226,22 @@
                         android:id="@+id/homeBtn"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:contentDescription="@string/home"
-                        android:src="@drawable/home"
-                        app:strokeWidth="0dp" />
+                        android:src="@drawable/home" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:text="@string/home"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
-                <!-- Transaction Button -->
+                <!-- Transaction -->
                 <LinearLayout
                     android:id="@+id/transacBtnLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
@@ -113,26 +251,22 @@
                         android:id="@+id/transacBtn"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:contentDescription="@string/transaction"
-                        android:src="@drawable/transaction"
-                        app:strokeWidth="0dp" />
+                        android:src="@drawable/transaction" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:text="@string/transaction"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
-                <!-- Analytics Button -->
+                <!-- Analytics -->
                 <LinearLayout
                     android:id="@+id/analyBtnLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
@@ -142,26 +276,22 @@
                         android:id="@+id/analy_btn"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:contentDescription="@string/analytics"
-                        android:src="@drawable/analysis"
-                        app:strokeWidth="0dp" />
+                        android:src="@drawable/analysis" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:text="@string/analytics"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
-                <!-- Profile Button -->
+                <!-- Profile -->
                 <LinearLayout
                     android:id="@+id/profBtnLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
@@ -171,17 +301,14 @@
                         android:id="@+id/prof_btn"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:contentDescription="@string/profile"
-                        android:src="@drawable/user"
-                        app:strokeWidth="0dp" />
+                        android:src="@drawable/user" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:text="@string/profile"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
