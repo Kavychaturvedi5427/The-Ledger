@@ -41,7 +41,8 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="2"
+                >
 
                 <!-- Balance section -->
                 <LinearLayout
@@ -49,8 +50,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/balance"
@@ -58,8 +59,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lexend"
                         android:text="@string/Balance"
-                        android:textSize="24sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/balance1"
@@ -67,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/lexend"
-                        android:text="₹10,000"
+                        android:text="₹ 0"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -76,8 +77,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="50dp"
-                    android:background="@color/black"
-                    android:layout_marginHorizontal="10dp" />
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
 
                 <!-- Expense section -->
                 <LinearLayout
@@ -85,8 +86,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/expensesLabel"
@@ -94,8 +95,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lexend"
                         android:text="Expenses"
-                        android:textSize="24sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/expensesValue"
@@ -109,69 +110,99 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Add Balance / Expense Buttons -->
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/BtnOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/balanceExpenseContainer"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="10dp">
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <!-- Add Balance -->
                 <LinearLayout
                     android:id="@+id/addBalancell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_centerHorizontal="true">
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/AddBalanceimg"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/balanceadd"
-                        android:contentDescription="AddBalance" />
+                        android:contentDescription="Add Balance"
+                        android:src="@drawable/balanceadd" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
                         android:text="Add Balance"
-                        android:layout_gravity="center" />
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
+                <!-- Add Expense -->
                 <LinearLayout
                     android:id="@+id/addexpnsell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/addBalancell"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:layout_centerHorizontal="true">
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/AddExpense"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:contentDescription="Add Expense"
                         android:src="@drawable/minus" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
                         android:text="Add Expense"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center" />
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
-                <!-- Separator line below Expense -->
-                <View
-                    android:id="@+id/optionSeparator"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/addexpnsell"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/black" />
-            </RelativeLayout>
+                <!-- Reset -->
+                <LinearLayout
+                    android:id="@+id/resetBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:contentDescription="Reset"
+                        android:src="@drawable/reset" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:text="Reset"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Separator line below -->
+            <View
+                android:id="@+id/optionSeparator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/BtnOption"
+                android:layout_marginTop="12dp"
+                android:background="@color/black" />
+
 
             <!-- Placeholder for main dashboard content -->
             <RelativeLayout
@@ -232,8 +263,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/home"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <!-- Transaction -->
@@ -257,8 +288,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/transaction"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <!-- Analytics -->
@@ -282,8 +313,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/analytics"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <!-- Profile -->
@@ -307,8 +338,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/profile"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
