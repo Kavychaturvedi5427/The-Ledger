@@ -107,23 +107,23 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/lexend"
-                    android:text="Aadhar ID"
+                    android:text="Email ID"
 
                     android:textSize="15sp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/aadhartxt"
+                    android:id="@+id/emailtxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/Enteremail"
-                    android:hint="Enter your Aadhar ID"
+                    android:hint="Enter your Email ID"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/EnterPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/aadhartxt"
+                    android:layout_below="@id/emailtxt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="10dp"
@@ -158,9 +158,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/EnterPin"
-                    android:hint="Enter 4-digit PIN"
+                    android:hint="Enter 6-digit PIN"
                     android:inputType="numberPassword"
-                    android:maxLength="4"
+                    android:maxLength="6"
                     android:textSize="12sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
