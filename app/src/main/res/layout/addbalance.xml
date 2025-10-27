@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
                     android:text="Cancel" />
 
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
                     android:text="Add" />
             </LinearLayout>

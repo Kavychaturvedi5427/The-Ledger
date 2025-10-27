@@ -200,7 +200,7 @@
                     android:layout_below="@+id/pinInput"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
                     android:text="Login"
                     android:id="@+id/loginBtn"/>
@@ -244,6 +244,14 @@
                     android:layout_below="@+id/redirectSignup"
                     android:layout_centerHorizontal="true"
                     />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

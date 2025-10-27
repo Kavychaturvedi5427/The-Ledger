@@ -57,7 +57,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:padding="4dp"
                     android:text="@string/loginBtn" />
 
@@ -69,7 +69,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:padding="4dp"
                     android:text="@string/signUpBtn" />
 

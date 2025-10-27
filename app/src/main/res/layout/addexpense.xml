@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="Cancel"
                     android:fontFamily="@font/lexend"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:layout_margin="5dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:text="Add"
                     android:fontFamily="@font/lexend"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:layout_margin="5dp" />
             </LinearLayout>
 

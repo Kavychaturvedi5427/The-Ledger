@@ -66,6 +66,7 @@
                     android:fontFamily="@font/lexend"
                     android:text="@string/EnterDetailsLogin"
 
+
                     android:textSize="15sp" />
 
                 <!-- Divider below enter -->
@@ -170,7 +171,7 @@
                     android:layout_below="@id/pintxt"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
-                    android:background="@color/blue"
+                    android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
                     android:text="Sign UP"
                     android:textSize="15sp" />

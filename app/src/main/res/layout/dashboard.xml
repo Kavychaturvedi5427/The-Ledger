@@ -5,28 +5,40 @@
     android:background="@drawable/background_gradient"
     android:fitsSystemWindows="true">
 
-    <!-- Scrollable content -->
+    <!-- Main scrollable container -->
     <ScrollView
-        android:id="@+id/scrollContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navbarShadowContainer"
-        android:fillViewport="true"
-        android:padding="8dp">
-
+        android:fillViewport="true">
 
         <RelativeLayout
             android:id="@+id/MainScrollContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp"
+            android:gravity="center_horizontal">
 
             <!-- Username -->
+            <!-- Lottie animation at top -->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/greet_lottie"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/greet" />
+
+            <!-- Username below Lottie -->
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/greet_lottie"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/lexend"
                 android:text="Welcome, User!"
                 android:textColor="@color/black"
@@ -38,11 +50,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/username"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                >
+                android:weightSum="2">
 
                 <!-- Balance section -->
                 <LinearLayout
@@ -110,13 +121,14 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Buttons container -->
             <LinearLayout
                 android:id="@+id/BtnOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/balanceExpenseContainer"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -203,14 +215,13 @@
                 android:layout_marginTop="12dp"
                 android:background="@color/black" />
 
-
             <!-- Placeholder for main dashboard content -->
             <RelativeLayout
                 android:id="@+id/MainContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/BtnOption"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="12dp" />
         </RelativeLayout>
     </ScrollView>
 
