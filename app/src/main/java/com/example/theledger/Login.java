@@ -7,7 +7,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +27,14 @@ public class Login extends AppCompatActivity {
     // Move to next box after typing one digit
     private void moveToNext(EditText curr, EditText next) {
         curr.addTextChangedListener(new TextWatcher() {
-            @Override public void afterTextChanged(Editable s) {}
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 1 && next != null) next.requestFocus();
@@ -64,6 +72,7 @@ public class Login extends AppCompatActivity {
         AppCompatButton login = findViewById(R.id.loginBtn);
         AppCompatEditText email = findViewById(R.id.emailedit);
         ShapeableImageView back = findViewById(R.id.back_btn);
+        ProgressBar progress = findViewById(R.id.progressBar);
 
         // getting access to the firebase database....
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -107,32 +116,38 @@ public class Login extends AppCompatActivity {
                     pin5.getText().toString().trim() +
                     pin6.getText().toString().trim();
 
-            if (pin.length() != 6) {
-                Toast.makeText(Login.this, "Enter complete 6-digit PIN", Toast.LENGTH_SHORT).show();
-                return;
-            }
 
             String EnterEmail = email.getText().toString().trim();
             if (EnterEmail.isEmpty()) {
-                Toast.makeText(Login.this, "Please enter your Email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "We can’t log you in if you don’t tell us who you are.", Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (pin.length() != 6) {
+                Toast.makeText(Login.this, "Your PIN’s having an identity crisis — needs 6 digits.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(EnterEmail.isEmpty() || pin.length() !=6){
+                Toast.makeText(Login.this, "Please enter something — psychic login isn’t ready yet.", Toast.LENGTH_SHORT).show();
+            }
+            progress.setVisibility(View.VISIBLE);
+            login.setEnabled(false);
 
             // signing in with EnteredEmail and PIN
             auth.signInWithEmailAndPassword(EnterEmail, pin)
                     .addOnSuccessListener(authResult -> {
                         // once signing is done fetch the user id (UID)...
                         String uid = authResult.getUser().getUid();
-
                         db.collection("users")
                                 .document(uid)
                                 .get()
                                 .addOnSuccessListener(documentSnapshot -> {
+                                    progress.setVisibility(View.VISIBLE);
+                                    login.setEnabled(true);
                                     if (documentSnapshot.exists()) {
                                         String storedPin = documentSnapshot.getString("Pin");
                                         // optional: verify pin from Firestore too
                                         if (pin.equals(storedPin)) {
-                                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Login.this, "You’re in! The app approves", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(Login.this, DashBoard.class);
                                             intent.putExtra("uid", uid); // pass UID to dashboard
                                             startActivity(intent);
@@ -144,11 +159,14 @@ public class Login extends AppCompatActivity {
                                         Toast.makeText(Login.this, "User doesn't exist.", Toast.LENGTH_SHORT).show();
                                     }
                                 })
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(Login.this, "Error fetching data", Toast.LENGTH_SHORT).show());
+                                .addOnFailureListener(e -> {
+                                    progress.setVisibility(View.GONE);
+                                    login.setEnabled(true);
+                                    Toast.makeText(Login.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                                });
                     })
                     .addOnFailureListener(e ->
-                            Toast.makeText(Login.this, "Invalid credentials: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            Toast.makeText(Login.this, "Credentials rejected. Even the app has standards. ", Toast.LENGTH_SHORT).show());
         });
 
         // --- FORGOT PIN RESET ---
@@ -238,12 +256,12 @@ public class Login extends AppCompatActivity {
                         pin_6Reset.getText().toString().trim();
 
                 if (phonenum.isEmpty()) {
-                    Toast.makeText(Login.this, "Enter your phone number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Empty fields won’t reset anything, pal", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (!newpin.equals(confirmPin)) {
-                    Toast.makeText(Login.this, "PINs do not match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "New PINs should match. It’s not a competition.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -257,13 +275,13 @@ public class Login extends AppCompatActivity {
                                         .document(document.getId())
                                         .update("Pin", newpin)
                                         .addOnSuccessListener(aVoid -> {
-                                            Toast.makeText(Login.this, "PIN updated successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Login.this, "PIN updated! Try not to forget it this time.", Toast.LENGTH_SHORT).show();
                                             resetDialog.dismiss();
                                         })
                                         .addOnFailureListener(e ->
                                                 Toast.makeText(Login.this, "Try again", Toast.LENGTH_SHORT).show());
                             } else {
-                                Toast.makeText(Login.this, "No such phone number exists", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "If this is your number, Firestore strongly disagrees.", Toast.LENGTH_SHORT).show();
                             }
                         });
             });

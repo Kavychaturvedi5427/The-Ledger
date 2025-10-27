@@ -160,11 +160,8 @@ public class DashBoard extends AppCompatActivity {
         LinearLayout profileBTN = findViewById(R.id.profBtnLayout);
         profileBTN.setOnClickListener(v -> {
             Profile_nav profileSheet = new Profile_nav();
-            Bundle args = new Bundle();
-            args.putString("user_name", username.getText().toString().replace("Welcome, ", ""));
-            args.putString("user_email", "Your Mail"); // update later with real email if needed
-            profileSheet.setArguments(args);
             profileSheet.show(getSupportFragmentManager(), "profile_nav");
+
         });
     }
 
@@ -294,5 +291,7 @@ public class DashBoard extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> Toast.makeText(DashBoard.this, "Error adding expense: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
+
+
     }
 }
