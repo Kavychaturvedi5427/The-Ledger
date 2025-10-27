@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="9dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/Edittxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/lexend"
+                android:text=" Just making sure it’s not a mess "
+                android:textSize="19sp" />
+
+            <View
+                android:id="@+id/div1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/Edittxt"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/nameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/div1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="9dp"
+                android:fontFamily="@font/lexend"
+                android:text="Name"
+                android:textSize="17sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameTxt"
+                android:fontFamily="@font/lexend"
+                android:hint="Double Check This"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/NameInput"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/EmailTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/div2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="9dp"
+                android:fontFamily="@font/lexend"
+                android:text="Email"
+                android:textSize="17sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/EmailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/EmailTxt"
+                android:fontFamily="@font/lexend"
+                android:hint="spam folder beware!"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/div3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/EmailInput"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/PhoneTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/div3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="9dp"
+                android:fontFamily="@font/lexend"
+                android:text="Phone"
+                android:textSize="17sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/PhoneInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/PhoneTxt"
+                android:fontFamily="@font/lexend"
+                android:hint="hopefully not a fake one"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/div4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/PhoneInput"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btnLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_below="@id/div4"
+                android:layout_margin="10dp"
+                >
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/noBtn"
+                    android:layout_margin="5dp"
+                    android:text="never mind"
+                    android:fontFamily="@font/lexend"
+                    android:background="@color/lavender"
+                    android:padding="10dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/YesBtn"
+                    android:layout_margin="5dp"
+                    android:text="ok fine"
+                    android:fontFamily="@font/lexend"
+                    android:background="@color/lavender"
+                    android:padding="10dp"
+                    />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>
