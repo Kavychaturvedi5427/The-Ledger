@@ -19,5 +19,9 @@
     <string name="analytics">Analytics</string>
     <string name="profile">Profile</string>
     <string name="Balance">Your Balance</string>
+    <string name="app_desc">TheLedger is a personal expense tracker that helps you record, analyze, and manage your daily transactions with ease.</string>
+    <string name="about_last_cmt">An app. Nothing more, nothing less.”</string>
+    <string name="suggest_card">Suggestions? Fine.</string>
+    <string name="suggest_input">Type. Don’t hurt yourself.</string>
 
 </resources>
