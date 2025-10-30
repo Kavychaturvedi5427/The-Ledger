@@ -1,26 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme for Dark Mode -->
-    <style name="Theme.TheLedger" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TheLedger" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
         <!-- Primary brand color -->
-        <item name="colorPrimary">#F6F6F6</item>
-        <item name="colorPrimaryVariant">#A2D5C6</item>
+        <item name="colorPrimary">#C9A6FF</item> <!-- Muted lavender accent -->
+        <item name="colorPrimaryVariant">#A678FF</item> <!-- Slightly deeper tone -->
         <item name="colorOnPrimary">#000000</item>
 
         <!-- Secondary brand color -->
-        <item name="colorSecondary">#A2D5C6</item>
-        <item name="colorSecondaryVariant">#6BAA98</item>
-        <item name="colorOnSecondary">#000000</item>
+        <item name="colorSecondary">#D9C4FF</item> <!-- Matches your light theme gradient tone -->
+        <item name="colorSecondaryVariant">#B68AFF</item>
+        <item name="colorOnSecondary">#1E1E1E</item>
 
-        <!-- Text color -->
-        <item name="android:textColor">#F6F6F6</item>
+        <!-- Text and content colors -->
+        <item name="android:textColor">#EDE7F6</item> <!-- Light lavender-white text -->
+        <item name="android:textColorHint">#BCAFD6</item>
+        <item name="android:editTextColor">#FFFFFF</item>
 
         <!-- Background and surface colors -->
-        <item name="android:colorBackground">#121212</item>
-        <item name="colorSurface">#1E1E1E</item>
+        <item name="android:colorBackground">#0E0E0F</item> <!-- Deep dark purple-gray -->
+        <item name="colorSurface">#1C1C1F</item> <!-- Card and dialog surfaces -->
         <item name="colorOnSurface">#FFFFFF</item>
 
-        <!-- Status and navigation bars -->
-        <item name="android:statusBarColor">#000000</item>
-        <item name="android:navigationBarColor">#000000</item>
+        <!-- System bars -->
+        <item name="android:statusBarColor" tools:targetApi="l">#0E0E0F</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">#0E0E0F</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <item name="android:windowBackground">@drawable/background_gradient_dark</item>
+
+        <!-- Optional UI highlights -->
+        <item name="colorControlHighlight">#4E2F8D</item>
+        <item name="colorAccent">#B68AFF</item>
     </style>
 </resources>

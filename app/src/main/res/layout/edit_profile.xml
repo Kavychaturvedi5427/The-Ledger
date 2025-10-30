@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="9dp"
+    app:cardCornerRadius="20dp"
+    android:padding="10dp"
+    android:layout_margin="15dp"
+    >
+
+    <ScrollView
+        android:id="@+id/MainScrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            >
+
+            <TextView
+                android:id="@+id/mainHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:text="Edit Your Info"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                />
+            <View
+                android:id="@+id/div1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                android:layout_below="@id/mainHeading"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                />
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/div1"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/bak"
+                android:clickable="true"
+                android:focusable="true"
+                />
+
+<!--            <ImageView-->
+<!--                android:id="@+id/saveBtn"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_below="@id/div1"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginEnd="25dp"-->
+<!--                android:layout_marginTop="25dp"-->
+<!--                android:src="@drawable/save"-->
+<!--                android:focusable="true"-->
+<!--                android:clickable="true"-->
+<!--                />-->
+            
+            <ImageView
+                android:id="@+id/profile_Avatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_below="@id/backBtn"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/profile"
+                android:clickable="true"
+                android:focusable="true"
+                />
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                android:layout_below="@id/profile_Avatar"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/NameHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:fontFamily="@font/lexend"
+                android:textSize="17sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/div2"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_txt"
+                android:layout_below="@id/NameHeading"
+                android:hint="Enter Name"
+                android:textSize="15sp"
+                android:fontFamily="@font/lexend"
+                android:layout_marginTop="5dp"
+                />
+
+
+            <View
+                android:id="@+id/div3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                android:layout_below="@id/name_txt"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/phoneHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:fontFamily="@font/lexend"
+                android:textSize="17sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/div3"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneTxt"
+                android:layout_below="@id/phoneHeading"
+                android:hint="Enter new Phone Number"
+                android:textSize="15sp"
+                android:fontFamily="@font/lexend"
+                android:layout_marginTop="5dp"
+                />
+
+
+            <View
+                android:id="@+id/div4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                android:layout_below="@id/phoneTxt"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/emailHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:fontFamily="@font/lexend"
+                android:textSize="17sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/div4"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailTxt"
+                android:layout_below="@id/emailHeading"
+                android:hint="Enter New Email"
+                android:textSize="15sp"
+                android:fontFamily="@font/lexend"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/passHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PIN"
+                android:fontFamily="@font/lexend"
+                android:textSize="17sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/div5"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pintxt"
+                android:layout_below="@id/passHead"
+                android:hint="Enter Pin"
+                android:textSize="15sp"
+                android:fontFamily="@font/lexend"
+                android:layout_marginTop="5dp"
+                />
+
+
+            <ProgressBar
+                android:id="@+id/customProgress"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:indeterminate="true"
+                android:progressDrawable="@drawable/custom_progress"
+                android:indeterminateDrawable="@drawable/custom_progress"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+
+            <View
+                android:id="@+id/div5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                android:layout_below="@id/emailTxt"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveBTN"
+                android:layout_below="@id/pintxt"
+                android:layout_centerHorizontal="true"
+                android:text="Save Changes"
+                android:fontFamily="@font/lexend"
+                android:textSize="14sp"
+                android:background="@color/lavender"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</androidx.cardview.widget.CardView>

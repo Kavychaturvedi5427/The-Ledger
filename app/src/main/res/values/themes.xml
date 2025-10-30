@@ -1,27 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.TheLedger" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryVariant">#A2D5C6</item>
-        <item name="colorOnPrimary">#F6F6F6</item>
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">#B38BFA</item> <!-- Soft purple accent -->
+        <item name="colorPrimaryVariant">#A074F5</item> <!-- Slightly deeper for emphasis -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- White text on purple -->
 
-        <item name="colorSecondary">#CFFFE2</item>
-        <item name="colorSecondaryVariant">#A2D5C6</item>
-        <item name="colorOnSecondary">#000000</item>
+        <!-- Secondary tones (to complement gradient and UI highlights) -->
+        <item name="colorSecondary">#EBD8FF</item>
+        <item name="colorSecondaryVariant">#D9C4FF</item>
+        <item name="colorOnSecondary">#3A2C59</item> <!-- Deep purple text -->
 
-        <item name="android:textColor">@color/gray</item>
+        <!-- Backgrounds and surfaces -->
+        <item name="android:colorBackground">#F9F6FF</item> <!-- very light lavender -->
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#2D1B3D</item> <!-- readable dark purple text -->
+        <item name="android:textColor">#3A2C59</item>
 
-        <item name="android:colorBackground">#F6F6F6</item>
-        <item name="colorSurface">#1E1E1E</item>
-        <item name="colorOnSurface">#FFFFFF</item>
-
+        <!-- System bars -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
-
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="l">true</item>
-
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-
         <item name="android:navigationBarColor" tools:targetApi="l">@android:color/transparent</item>
+
+        <!-- Optional: ripple, icon, and hint tones -->
 
     </style>
 </resources>
