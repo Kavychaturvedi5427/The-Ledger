@@ -51,6 +51,9 @@
         <activity android:name=".DashBoard"
             android:exported="true"
             />
+        <activity android:name=".About_app"
+            android:exported="true"
+            />
 
     </application>
 

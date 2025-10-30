@@ -246,12 +246,15 @@
                     />
 
                 <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/customProgress"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:indeterminate="true"
+                    android:progressDrawable="@drawable/custom_progress"
+                    android:indeterminateDrawable="@drawable/custom_progress"
                     android:layout_centerInParent="true"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
+
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
