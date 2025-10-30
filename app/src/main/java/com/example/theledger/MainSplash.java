@@ -1,7 +1,9 @@
 package com.example.theledger;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -27,5 +29,12 @@ public class MainSplash extends AppCompatActivity {
         // fade and zoom animation on the main logo
         Animation logoAnim = AnimationUtils.loadAnimation(this , R.anim.fade_zoom);
         findViewById(R.id.mainimg).startAnimation(logoAnim);
+        int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (mode == Configuration.UI_MODE_NIGHT_YES) {
+            Log.d("ThemeCheck", "Dark mode active");
+        } else {
+            Log.d("ThemeCheck", "Light mode active");
+        }
+
     }
 }

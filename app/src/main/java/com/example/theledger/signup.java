@@ -29,7 +29,7 @@ public class signup extends AppCompatActivity {
         AppCompatEditText phone = findViewById(R.id.phonetxt);
         AppCompatEditText pin = findViewById(R.id.pintxt);
         AppCompatButton signup = findViewById(R.id.signupbtn);
-        ProgressBar progress = findViewById(R.id.progressBar);
+        ProgressBar progress = findViewById(R.id.customProgress);
         ShapeableImageView backBtn = findViewById(R.id.backbtn);
 
         // Back button functionality
