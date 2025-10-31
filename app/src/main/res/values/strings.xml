@@ -23,5 +23,6 @@
     <string name="about_last_cmt">An app. Nothing more, nothing less.”</string>
     <string name="suggest_card">Suggestions? Fine.</string>
     <string name="suggest_input">Type. Don’t hurt yourself.</string>
+    <string name="privacy_Heading">Privacy And Settings Menu</string>
 
 </resources>
