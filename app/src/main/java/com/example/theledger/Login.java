@@ -168,6 +168,7 @@ public class Login extends AppCompatActivity {
         PinReset.setOnClickListener(v1 -> {
             Dialog resetDialog = new Dialog(Login.this);
             resetDialog.setContentView(R.layout.reset_dialog);
+            resetDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             resetDialog.show();
 
             // New PIN

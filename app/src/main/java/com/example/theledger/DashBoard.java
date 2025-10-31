@@ -161,7 +161,6 @@ public class DashBoard extends AppCompatActivity {
         profileBTN.setOnClickListener(v -> {
             Profile_nav profileSheet = new Profile_nav();
             profileSheet.show(getSupportFragmentManager(), "profile_nav");
-
         });
     }
 
@@ -291,7 +290,6 @@ public class DashBoard extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> Toast.makeText(DashBoard.this, "Error adding expense: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
-
 
     }
 }
