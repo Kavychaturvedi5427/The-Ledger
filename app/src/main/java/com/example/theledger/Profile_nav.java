@@ -196,6 +196,30 @@ public class Profile_nav extends BottomSheetDialogFragment {
                 startActivity(about_intent);
             }
         });
+        
+        
+//      ---------- Change theme functionality (will be implemented later) -----------
+        CardView theme = view.findViewById(R.id.Theme_Card);
+        theme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Oh, you really thought that’d change the theme?", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        --------- Privacy and Settings menu ---------
+        CardView Privacy = view.findViewById(R.id.privacy_Setting_card);
+        Privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Privacy_BTM privacyBtm = new Privacy_BTM();
+                privacyBtm.show(getParentFragmentManager(), privacyBtm.getTag());
+
+            }
+        });
+
+
+
         return view;
     }
 }

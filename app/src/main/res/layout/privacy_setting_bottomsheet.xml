@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="19dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="9dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/bottomSheetDragHandleView"
+                android:layout_width="36dp"
+                android:layout_height="4dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:background="@color/gray"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.SmallComponent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/privacySetting_lottie"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/privacysettings" />
+
+            <TextView
+                android:id="@+id/mainHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/privacySetting_lottie"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/lexend"
+                android:text="@string/privacy_Heading"
+                android:textSize="20sp" />
+
+            <View
+                android:id="@+id/div1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/mainHeading"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/black" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/AppLock_card"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/div1"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="9dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text="App Lock"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/lexend"
+                        android:text=" Enable "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/lexend"
+                        android:text="Biometric "
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/applock_lottie"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/div1"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/AppLock_card"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/applock" />
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/AppLock_card"
+                android:layout_marginVertical="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/black" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/privacy_policy_Card"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/div2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="9dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text="Privacy"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text=" Policy "
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/privacy"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_below="@id/div2"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@id/privacy_policy_Card"
+                android:src="@drawable/privacy_policy" />
+
+            <View
+                android:id="@+id/div3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/privacy_policy_Card"
+                android:layout_marginVertical="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/black" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/beta_feature_card"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/div3"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="9dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text="Beta"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text=" Features "
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/beta"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_below="@id/div3"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/beta_feature_card"
+                android:src="@drawable/beta" />
+
+
+            <View
+                android:id="@+id/div4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/beta_feature_card"
+                android:layout_marginVertical="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/black" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/delete_account_Card"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/div4"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="9dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text="Delete"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lexend"
+                        android:text=" Account "
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/delete_lottie"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/div4"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@id/delete_account_Card"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/deleteaccount" />
+
+            <View
+                android:id="@+id/div5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/delete_account_Card"
+                android:layout_marginVertical="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/black" />
+
+            <ImageView
+                android:id="@+id/backbtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/div5"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/back"
+                android:layout_marginBottom="10dp"/>
+
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.cardview.widget.CardView>
