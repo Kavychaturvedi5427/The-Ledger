@@ -9,18 +9,26 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.concurrent.Executor;
 
 public class Login extends AppCompatActivity {
 
@@ -73,6 +81,7 @@ public class Login extends AppCompatActivity {
         AppCompatEditText email = findViewById(R.id.emailedit);
         ShapeableImageView back = findViewById(R.id.back_btn);
         ProgressBar progress = findViewById(R.id.customProgress);
+        ImageView fingerprint = findViewById(R.id.fingerprintico);
 
         // getting access to the firebase database....
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -111,7 +120,8 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(v -> {
             progress.setVisibility(View.VISIBLE);
 
-            String pin = pin1.getText().toString().trim() + pin2.getText().toString().trim() + pin3.getText().toString().trim() + pin4.getText().toString().trim() + pin5.getText().toString().trim() + pin6.getText().toString().trim();
+            String pin = pin1.getText().toString().trim() + pin2.getText().toString().trim() + pin3.getText().toString().trim()
+                    + pin4.getText().toString().trim() + pin5.getText().toString().trim() + pin6.getText().toString().trim();
 
             String EnterEmail = email.getText().toString().trim();
 
@@ -133,6 +143,7 @@ public class Login extends AppCompatActivity {
             auth.signInWithEmailAndPassword(EnterEmail, pin).addOnSuccessListener(authResult -> {
                 String uid = authResult.getUser().getUid();
 
+                // fetching the data for the logged in user and passing it to the dashboard intent
                 db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
                     login.setEnabled(true);
                     progress.setVisibility(View.GONE);
@@ -164,7 +175,7 @@ public class Login extends AppCompatActivity {
         });
 
 
-        // --- FORGOT PIN RESET ---
+        // --- PIN RESET ---
         PinReset.setOnClickListener(v1 -> {
             Dialog resetDialog = new Dialog(Login.this);
             resetDialog.setContentView(R.layout.reset_dialog);
@@ -237,9 +248,13 @@ public class Login extends AppCompatActivity {
             // Confirm button
             confirmBtn.setOnClickListener(view -> {
                 String phonenum = phone.getText().toString().trim();
-                String newpin = pin1Reset.getText().toString().trim() + pin2Reset.getText().toString().trim() + pin3Reset.getText().toString().trim() + pin4Reset.getText().toString().trim() + pin5Reset.getText().toString().trim() + pin6Reset.getText().toString().trim();
+                String newpin = pin1Reset.getText().toString().trim() + pin2Reset.getText().toString().trim() +
+                        pin3Reset.getText().toString().trim() + pin4Reset.getText().toString().trim() +
+                        pin5Reset.getText().toString().trim() + pin6Reset.getText().toString().trim();
 
-                String confirmPin = pin_1Reset.getText().toString().trim() + pin_2Reset.getText().toString().trim() + pin_3Reset.getText().toString().trim() + pin_4Reset.getText().toString().trim() + pin_5Reset.getText().toString().trim() + pin_6Reset.getText().toString().trim();
+                String confirmPin = pin_1Reset.getText().toString().trim() + pin_2Reset.getText().toString().trim() +
+                        pin_3Reset.getText().toString().trim() + pin_4Reset.getText().toString().trim() +
+                        pin_5Reset.getText().toString().trim() + pin_6Reset.getText().toString().trim();
 
                 if (phonenum.isEmpty()) {
                     Toast.makeText(Login.this, "Empty fields won’t reset anything, pal", Toast.LENGTH_SHORT).show();
@@ -254,22 +269,129 @@ public class Login extends AppCompatActivity {
                 db.collection("users").whereEqualTo("Phone", phonenum).get().addOnSuccessListener(querySnapshot -> {
                     if (!querySnapshot.isEmpty()) {
                         DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                        db.collection("users").document(document.getId()).update("Pin", newpin).addOnSuccessListener(aVoid -> {
-                            Toast.makeText(Login.this, "PIN updated! Try not to forget it this time.", Toast.LENGTH_SHORT).show();
+                        db.collection("users").document(document.getId()).update("Pin", newpin)
+                                .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(Login.this, "PIN updated! Try not to forget it this time.", Toast.LENGTH_SHORT)
+                                    .show();
                             resetDialog.dismiss();
-                        }).addOnFailureListener(e -> Toast.makeText(Login.this, "Try again", Toast.LENGTH_SHORT).show());
+                        }).addOnFailureListener(e -> Toast.makeText(Login.this, "Try again", Toast.LENGTH_SHORT)
+                                        .show());
                     } else {
-                        Toast.makeText(Login.this, "If this is your number, Firestore strongly disagrees.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "If this is your number, Firestore strongly disagrees.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
             });
         });
 
-        // Back button
-        back.setOnClickListener(v2 -> {
-            Intent backIntent = new Intent(Login.this, chooseLoginSignup.class);
-            startActivity(backIntent);
-            finish();
+        fingerprint.setOnClickListener(v -> {
+            String enteredEmail = email.getText().toString().trim();
+            if (enteredEmail.isEmpty()) {
+                Toast.makeText(Login.this,
+                        "🤨 You forgot the email. Even your fingerprint’s confused.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Fetch user by email
+            db.collection("users")
+                    .whereEqualTo("Email", enteredEmail)
+                    .get()
+                    .addOnSuccessListener(querySnapshot -> {
+                        if (!querySnapshot.isEmpty()) {
+                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                            Boolean biometricEnabled = document.getBoolean("Biometric Functionality");
+
+                            if (biometricEnabled != null && biometricEnabled) {
+                                BiometricManager biometricManager = BiometricManager.from(Login.this);
+                                int canAuth = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG);
+
+                                if (canAuth == BiometricManager.BIOMETRIC_SUCCESS) {
+                                    showBiometricPromptForLogin(enteredEmail, document.getString("Pin"));
+                                } else if (canAuth == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
+                                    Toast.makeText(Login.this,
+                                            "📱 No fingerprints found — maybe try registering one?",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(Login.this,
+                                            "🧊 Your device just said ‘nope’ to biometrics.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(Login.this,
+                                        "🔓 App Lock is off — passwords still have a job, apparently.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(Login.this,
+                                    "🤷 No account found with that email. Try typing, maybe?",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(Login.this,
+                                    "☠️ Firestore’s feeling moody. Try again.",
+                                    Toast.LENGTH_SHORT).show()
+                    );
+        });
+
+        back.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+                Intent backTochoose = new Intent(Login.this,chooseLoginSignup.class);
+                startActivity(backTochoose);
+
+           }
         });
     }
+    private void showBiometricPromptForLogin(String email, String pin) {
+        Executor executor = ContextCompat.getMainExecutor(this);
+        BiometricPrompt biometricPrompt = new BiometricPrompt(this, executor,
+                new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+
+                        FirebaseAuth.getInstance()
+                                .signInWithEmailAndPassword(email, pin)
+                                .addOnSuccessListener(authResult -> {
+                                    Toast.makeText(Login.this,
+                                            "🔓 Welcome back, hacker. Fingerprint accepted.",
+                                            Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(Login.this, DashBoard.class));
+                                    finish();
+                                })
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(Login.this,
+                                                "💀 Authentication failed. Even your fingerprint betrayed you.",
+                                                Toast.LENGTH_SHORT).show()
+                                );
+                    }
+
+                    @Override
+                    public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                        Toast.makeText(Login.this,
+                                "💀 " + errString + " — even your fingerprint gave up.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                        Toast.makeText(Login.this,
+                                "🙃 Wrong finger, or maybe wrong life choices.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Fingerprint Login")
+                .setSubtitle("Prove you’re the real you, not a clone")
+                .setNegativeButtonText("Cancel, I like typing passwords")
+                .build();
+
+        biometricPrompt.authenticate(promptInfo);
+    }
+
 }
