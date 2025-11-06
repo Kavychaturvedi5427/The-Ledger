@@ -4,6 +4,9 @@
     package="com.example.theledger">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+<!--    Taking permission to use biometric functionality ...... -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
     <application
         android:allowBackup="true"
