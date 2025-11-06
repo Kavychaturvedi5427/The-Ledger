@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainCard"
@@ -77,31 +76,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text="App Lock"
-                        />
+                        android:textSize="17sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
                         android:fontFamily="@font/lexend"
                         android:text=" Enable "
-                        />
+                        android:textSize="15sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
                         android:fontFamily="@font/lexend"
                         android:text="Biometric "
-                        />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -145,24 +142,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text="Privacy"
-                        />
+                        android:textSize="17sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text=" Policy "
-                        />
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -204,23 +199,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    >
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text="Beta"
-                        />
+                        android:textSize="17sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text=" Features "
-                        />
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -259,29 +253,27 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="9dp" >
+                app:cardElevation="9dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text="Delete"
-                        />
+                        android:textSize="17sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
                         android:fontFamily="@font/lexend"
                         android:text=" Account "
-                        />
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -315,10 +307,10 @@
                 android:layout_height="35dp"
                 android:layout_below="@id/div5"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/back"
-                android:layout_marginBottom="10dp"/>
+                android:src="@drawable/back" />
 
 
         </RelativeLayout>
