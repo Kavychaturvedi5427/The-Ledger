@@ -194,16 +194,38 @@
                 </LinearLayout>
 
 
-                <androidx.appcompat.widget.AppCompatButton
+                <LinearLayout
+                    android:id="@+id/Btnll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/pinInput"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    android:background="@color/lavender"
-                    android:fontFamily="@font/lexend"
-                    android:text="Login"
-                    android:id="@+id/loginBtn"/>
+                    android:layout_below="@id/pinInput"
+                    android:layout_marginBottom="5dp"
+                    >
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pinInput"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="10dp"
+                        android:background="@color/lavender"
+                        android:fontFamily="@font/lexend"
+                        android:text="Login"
+                        android:id="@+id/loginBtn"/>
+
+                    <ImageView
+                        android:id="@+id/fingerprintico"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/fingerprint"
+                        android:layout_gravity="center"
+                        android:contentDescription="Fingerprint"
+                        />
+
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/reset"
@@ -212,7 +234,7 @@
                     android:text="Forgot Pin? Reset Here"
                     android:fontFamily="@font/lexend"
                     android:textSize="15sp"
-                    android:layout_below="@id/loginBtn"
+                    android:layout_below="@id/Btnll"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
                     />

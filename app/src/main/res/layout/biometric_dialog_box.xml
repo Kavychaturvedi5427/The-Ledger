@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App Lock"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:fontFamily="@font/lexend"/>
+
+    <TextView
+        android:id="@+id/dialog_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable or disable biometric authentication to secure your account."
+        android:textSize="14sp"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:fontFamily="@font/lexend"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biometric App Lock"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/lexend"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/biometricSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>
