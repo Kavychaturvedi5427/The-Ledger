@@ -17,8 +17,6 @@ import androidx.cardview.widget.CardView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -75,21 +73,18 @@ public class Profile_nav extends BottomSheetDialogFragment {
             editDia.show();
 
             TextInputEditText NameTxt = editDia.findViewById(R.id.name_txt);
-            TextInputEditText EmailTxt = editDia.findViewById(R.id.emailTxt);
             TextInputEditText PhoneTxt = editDia.findViewById(R.id.phoneTxt);
-            TextInputEditText PinTxt = editDia.findViewById(R.id.pintxt);
             ImageView back = editDia.findViewById(R.id.backBtn);
             AppCompatButton save = editDia.findViewById(R.id.saveBTN);
 
             back.setOnClickListener(bv -> editDia.dismiss());
 
+
             save.setOnClickListener(sv -> {
                 String newName = NameTxt.getText().toString().trim();
-                String newEmail = EmailTxt.getText().toString().trim();
                 String newPhone = PhoneTxt.getText().toString().trim();
-                String currentPin = PinTxt.getText().toString().trim();
 
-                if (newName.isEmpty() || newEmail.isEmpty() || newPhone.isEmpty()) {
+                if (newName.isEmpty() || newPhone.isEmpty()) {
                     Toast.makeText(getContext(), "All fields are required", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -100,75 +95,39 @@ public class Profile_nav extends BottomSheetDialogFragment {
                     return;
                 }
 
-                // Step 1 → Update Firestore
+                // Step 1 → Update Firestore (Name + Phone only)
                 Map<String, Object> updates = new HashMap<>();
                 updates.put("Name", newName);
-                updates.put("Email", newEmail);
                 updates.put("Phone", newPhone);
 
                 DocumentReference userRef = db.collection("users").document(uid);
                 userRef.update(updates)
                         .addOnSuccessListener(v1 -> {
-                            // Update Auth profile name (always)
+                            // Step 2 → Update display name in Firebase Auth
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(newName)
                                     .build();
 
                             currentUser.updateProfile(profileUpdates)
                                     .addOnSuccessListener(unused -> {
-                                        // Step 2 → Update Firebase Auth email if needed
-                                        if (!currentUser.getEmail().equals(newEmail)) {
-                                            if (currentPin.isEmpty()) {
-                                                Toast.makeText(getContext(), "Enter your current PIN to confirm changes", Toast.LENGTH_SHORT).show();
-                                                return;
-                                            }
-
-                                            AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), currentPin);
-                                            currentUser.reauthenticate(credential)
-                                                    .addOnSuccessListener(aVoid -> {
-                                                        currentUser.updateEmail(newEmail)
-                                                                .addOnSuccessListener(aVoid2 -> {
-                                                                    db.collection("users").document(uid)
-                                                                            .update("Email", newEmail)
-                                                                            .addOnSuccessListener(v2 -> {
-                                                                                Toast.makeText(getContext(), "Email updated successfully ✅", Toast.LENGTH_SHORT).show();
-                                                                                name.setText(newName);
-                                                                                email.setText(newEmail);
-                                                                                editDia.dismiss();
-                                                                            })
-                                                                            .addOnFailureListener(e ->
-                                                                                    Toast.makeText(getContext(), "Auth updated but Firestore failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                                                                            );
-                                                                })
-                                                                .addOnFailureListener(e -> {
-                                                                    Toast.makeText(getContext(), "Email update failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                                                });
-                                                    })
-                                                    .addOnFailureListener(e -> {
-                                                        Toast.makeText(getContext(), "Re-authentication failed — incorrect PIN.", Toast.LENGTH_LONG).show();
-                                                    });
-                                        } else {
-                                            Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                                            name.setText(newName);
-                                            email.setText(newEmail);
-                                            editDia.dismiss();
-                                        }
+                                        Toast.makeText(getContext(), "Profile updated successfully 🎉", Toast.LENGTH_SHORT).show();
+                                        name.setText(newName);
+                                        editDia.dismiss();
                                     })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(getContext(), "Failed to update Auth display name: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    });
+                                    .addOnFailureListener(e -> Toast.makeText(getContext(),
+                                            "Failed to update Auth display name: " + e.getMessage(),
+                                            Toast.LENGTH_SHORT).show());
                         })
                         .addOnFailureListener(e ->
-                                Toast.makeText(getContext(), "Profile update failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(getContext(),
+                                        "Profile update failed: " + e.getMessage(),
+                                        Toast.LENGTH_SHORT).show()
                         );
-
             });
         });
 
         // -------- Logout --------
-        logout.setOnClickListener(view1 ->
-
-        {
+        logout.setOnClickListener(view1 -> {
             Dialog logDia = new Dialog(requireActivity());
             logDia.setContentView(R.layout.signout_layout);
             logDia.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -186,39 +145,27 @@ public class Profile_nav extends BottomSheetDialogFragment {
             logDia.findViewById(R.id.NoBtn).setOnClickListener(v3 -> logDia.dismiss());
         });
 
-//      ------------- ABOUT CARD --------------
-
+        // -------- ABOUT CARD --------
         CardView about = view.findViewById(R.id.About_card);
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent about_intent = new Intent(getContext() , About_app.class);
-                startActivity(about_intent);
-            }
+        about.setOnClickListener(v -> {
+            Intent aboutIntent = new Intent(getContext(), About_app.class);
+            startActivity(aboutIntent);
         });
-        
-        
-//      ---------- Change theme functionality (will be implemented later) -----------
+
+        // -------- THEME CARD --------
         CardView theme = view.findViewById(R.id.Theme_Card);
-        theme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Oh, you really thought that’d change the theme?", Toast.LENGTH_SHORT).show();
-            }
-        });
+        theme.setOnClickListener(v ->
+                Toast.makeText(getContext(),
+                        "Oh, you really thought that’d change the theme?",
+                        Toast.LENGTH_SHORT).show()
+        );
 
-//        --------- Privacy and Settings menu ---------
+        // -------- PRIVACY CARD --------
         CardView Privacy = view.findViewById(R.id.privacy_Setting_card);
-        Privacy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Privacy_BTM privacyBtm = new Privacy_BTM();
-                privacyBtm.show(getParentFragmentManager(), privacyBtm.getTag());
-
-            }
+        Privacy.setOnClickListener(v -> {
+            Privacy_BTM privacyBtm = new Privacy_BTM();
+            privacyBtm.show(getParentFragmentManager(), privacyBtm.getTag());
         });
-
-
 
         return view;
     }
