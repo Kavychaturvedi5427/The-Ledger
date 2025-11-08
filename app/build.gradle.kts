@@ -46,5 +46,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.json:json:20231013")
+    implementation("com.google.firebase:firebase-config")
+
 
 }
