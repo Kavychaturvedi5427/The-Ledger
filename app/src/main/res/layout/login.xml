@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp">
 
+                <!-- Logo -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mainimg"
                     android:layout_width="100dp"
@@ -35,6 +35,7 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/icon" />
 
+                <!-- Title -->
                 <TextView
                     android:id="@+id/loginMaintext"
                     android:layout_width="wrap_content"
@@ -46,14 +47,16 @@
                     android:text="@string/splash_introText"
                     android:textSize="20sp" />
 
+                <!-- Divider -->
                 <View
                     android:id="@+id/divider1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/loginMaintext"
-                    android:layout_marginVertical="8dp"
-                    android:background="#BDBDBD" />
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/black" />
 
+                <!-- Subtitle -->
                 <TextView
                     android:id="@+id/loginsubtext"
                     android:layout_width="wrap_content"
@@ -65,15 +68,18 @@
                     android:text="@string/LoginSubtext"
                     android:textSize="17sp" />
 
+                <!-- Divider -->
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/loginsubtext"
                     android:layout_marginVertical="8dp"
-                    android:background="#BDBDBD" />
+                    android:background="@color/black" />
+
+                <!-- Email Label -->
                 <TextView
-                    android:id="@+id/email"
+                    android:id="@+id/emailLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/divider2"
@@ -83,202 +89,149 @@
                     android:text="Enter Email ID"
                     android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <!-- Email Input (Material, transparent, underline style) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/email"
-                    android:id="@+id/emailedit"
-                    android:hint="Enter your Email ID"
-                    android:textSize="12sp"
-                    />
+                    android:layout_below="@id/emailLabel"
+                    android:hint="Enter your Email ID">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/emailLayout"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/black" />
+
+                <!-- Password Label -->
                 <TextView
                     android:id="@+id/pintext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/emailedit"
+                    android:layout_below="@id/divider3"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
                     android:fontFamily="@font/lexend"
-                    android:text="@string/PinInput"
+                    android:text="Password"
                     android:textSize="15sp" />
 
-                <LinearLayout
-                    android:id="@+id/pinInput"
+                <!-- Password Input (Material, transparent, with toggle) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/pintext"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="6">
+                    android:layout_below="@id/pintext"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/black"
+                    android:hint="Enter Password to login">
 
-                    <EditText
-                        android:id="@+id/pin1"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/pin_box"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/pinInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:inputType="textPassword"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/passwordLayout"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/black" />
 
-                    <EditText
-                        android:id="@+id/pin2"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/pin_box"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/pin3"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/pin_box"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/pin4"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/pin_box"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/pin5"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/pin_box"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/pin6"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/pin_box"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-
+                <!-- Buttons -->
                 <LinearLayout
                     android:id="@+id/Btnll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
+                    android:layout_below="@id/divider4"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/pinInput"
                     android:layout_marginBottom="5dp"
-                    >
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/loginBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/pinInput"
-                        android:layout_centerHorizontal="true"
                         android:layout_margin="10dp"
                         android:background="@color/lavender"
                         android:fontFamily="@font/lexend"
-                        android:text="Login"
-                        android:id="@+id/loginBtn"/>
+                        android:text="Login" />
 
                     <ImageView
                         android:id="@+id/fingerprintico"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/fingerprint"
                         android:layout_gravity="center"
                         android:contentDescription="Fingerprint"
-                        />
-
-
+                        android:src="@drawable/fingerprint" />
                 </LinearLayout>
 
+                <!-- Reset Password -->
                 <TextView
                     android:id="@+id/reset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forgot Pin? Reset Here"
-                    android:fontFamily="@font/lexend"
-                    android:textSize="15sp"
                     android:layout_below="@id/Btnll"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
-                    />
+                    android:fontFamily="@font/lexend"
+                    android:text="Forgot Password? Reset Here"
+                    android:textSize="15sp" />
+
                 <View
                     android:id="@+id/logindivider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginVertical="2dp"
                     android:layout_below="@id/reset"
-                    android:background="#BDBDBD"/>
+                    android:layout_marginVertical="2dp"
+                    android:background="#BDBDBD" />
 
+                <!-- Signup Redirect -->
                 <TextView
                     android:id="@+id/redirectSignup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Not having an account? Sign Up"
-                    android:fontFamily="@font/lexend"
-                    android:textSize="15sp"
                     android:layout_below="@id/logindivider"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
-                    />
+                    android:fontFamily="@font/lexend"
+                    android:text="Not having an account? Sign Up"
+                    android:textSize="15sp" />
 
+                <!-- Back Button -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/back_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/back"
-                    android:layout_below="@+id/redirectSignup"
+                    android:layout_below="@id/redirectSignup"
                     android:layout_centerHorizontal="true"
-                    />
+                    android:src="@drawable/back" />
 
+                <!-- Progress Indicator -->
                 <ProgressBar
                     android:id="@+id/customProgress"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:indeterminate="true"
-                    android:progressDrawable="@drawable/custom_progress"
-                    android:indeterminateDrawable="@drawable/custom_progress"
                     android:layout_centerInParent="true"
-                    android:visibility="gone"/>
+                    android:indeterminate="true"
+                    android:indeterminateDrawable="@drawable/custom_progress"
+                    android:progressDrawable="@drawable/custom_progress"
+                    android:visibility="gone" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 </ScrollView>
