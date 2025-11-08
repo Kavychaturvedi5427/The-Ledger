@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,7 +91,7 @@ public class About_app extends AppCompatActivity {
             }
         });
 
-//      -------- Storing suggetion in the db (suggestion) ----------
+//      -------- Storing suggestion in the db (suggestion) ----------
         AppCompatEditText suggestion = findViewById(R.id.suggest_input);
         ImageView send = findViewById(R.id.sendBtn);
 
@@ -135,6 +137,18 @@ public class About_app extends AppCompatActivity {
                         progress.setVisibility(View.GONE);
                     });
         });
+
+        TextView termsofUse = findViewById(R.id.TermsOfUse);
+        termsofUse.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String url = "https://Kavychaturvedi5427.github.io/The-Ledger-Privacy/TermsOfUse.htm";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
 
 
         ImageView back = findViewById(R.id.backBtn);
