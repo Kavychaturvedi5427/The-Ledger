@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp">
 
+            <!-- Heading -->
             <TextView
                 android:id="@+id/mainHeading"
                 android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@color/gray" />
 
+            <!-- Back Button -->
             <ImageView
                 android:id="@+id/backBtn"
                 android:layout_width="30dp"
@@ -51,19 +53,7 @@
                 android:focusable="true"
                 android:src="@drawable/bak" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/saveBtn"-->
-            <!--                android:layout_width="30dp"-->
-            <!--                android:layout_height="30dp"-->
-            <!--                android:layout_below="@id/div1"-->
-            <!--                android:layout_alignParentEnd="true"-->
-            <!--                android:layout_marginEnd="25dp"-->
-            <!--                android:layout_marginTop="25dp"-->
-            <!--                android:src="@drawable/save"-->
-            <!--                android:focusable="true"-->
-            <!--                android:clickable="true"-->
-            <!--                />-->
-
+            <!-- Avatar -->
             <ImageView
                 android:id="@+id/profile_Avatar"
                 android:layout_width="45dp"
@@ -84,6 +74,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@color/gray" />
 
+            <!-- Name Section -->
             <TextView
                 android:id="@+id/NameHeading"
                 android:layout_width="wrap_content"
@@ -96,27 +87,33 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name_txt"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/NameHeading"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend"
-                android:hint="Enter Name"
-                android:textSize="15sp" />
+                android:hint="Enter Name">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:id="@+id/div3"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/name_txt"
+                android:layout_below="@id/nameLayout"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/gray" />
 
+            <!-- Phone Section -->
             <TextView
                 android:id="@+id/phoneHeading"
                 android:layout_width="wrap_content"
@@ -129,28 +126,33 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneTxt"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/phoneHeading"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend"
-                android:hint="Enter new Phone Number"
-                android:textSize="15sp" />
+                android:hint="Enter new Phone Number">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:id="@+id/div4"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/phoneTxt"
+                android:layout_below="@id/phoneLayout"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/gray" />
 
-
+            <!-- Password Section -->
             <TextView
                 android:id="@+id/passHead"
                 android:layout_width="wrap_content"
@@ -163,17 +165,26 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pintxt"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pinLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/passHead"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend"
-                android:hint="Enter Pin"
-                android:textSize="15sp" />
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/black"
+                android:hint="Enter Pin">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pintxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend"
+                    android:inputType="textPassword"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Progress -->
             <ProgressBar
                 android:id="@+id/customProgress"
                 android:layout_width="60dp"
@@ -184,12 +195,12 @@
                 android:progressDrawable="@drawable/custom_progress"
                 android:visibility="gone" />
 
-
+            <!-- Save Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/saveBTN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pintxt"
+                android:layout_below="@id/pinLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:background="@color/lavender"
@@ -199,7 +210,5 @@
                 android:textSize="14sp" />
 
         </RelativeLayout>
-
-
     </ScrollView>
 </androidx.cardview.widget.CardView>
