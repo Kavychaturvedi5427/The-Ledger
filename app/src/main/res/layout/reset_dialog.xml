@@ -9,9 +9,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
         android:padding="20dp">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="15dp">
+
                 <TextView
                     android:id="@+id/ResetTxt"
                     android:layout_width="wrap_content"
@@ -37,232 +39,42 @@
                     android:textStyle="bold" />
 
                 <View
-                    android:id="@+id/divider3"
+                    android:id="@+id/divider1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="15dp"
                     android:background="@color/gray" />
 
                 <TextView
-                    android:id="@+id/phone"
+                    android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter your Phone Number"
-                    android:fontFamily="@font/lexend"
-                    android:textSize="17sp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/lexend"
+                    android:text="Enter your Email Id"
+                    android:textSize="17sp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/phonetxt"
+                    android:id="@+id/emailtxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:hint="Enter Your Phone number"
-                    android:fontFamily="@font/lexend"
-                    android:layout_marginBottom="25dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"/>
-                <TextView
-                    android:id="@+id/newpin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/lexend"
-                    android:text="@string/new_pin"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:hint="Enter registered Email "
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="15sp"
 
-                <LinearLayout
-                    android:id="@+id/ll1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="25dp">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin1"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin2"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin3"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin4"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin5"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin6"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                    />
 
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/gray" />
 
-                <TextView
-                    android:id="@+id/confirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/lexend"
-                    android:text="@string/ConfirmationPin"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:id="@+id/ll2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="35dp">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin_1"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin_2"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin_3"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin_4"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin_5"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/pin_6"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/pin_box"
-                        android:fontFamily="@font/lexend"
-                        android:gravity="center"
-                        android:inputType="numberPassword"
-                        android:maxLength="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll3"
@@ -278,16 +90,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="Confirm"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:text="Confirm" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/cancelBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cancel"
                         android:layout_marginStart="20dp"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:text="Cancel" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
