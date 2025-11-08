@@ -3,18 +3,12 @@ package com.example.theledger;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -23,375 +17,231 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.Executor;
 
 public class Login extends AppCompatActivity {
 
-    // Move to next box after typing one digit
-    private void moveToNext(EditText curr, EditText next) {
-        curr.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
+    private FirebaseAuth auth;
+    private TextInputLayout emailLayout, passwordLayout;
+    private TextInputEditText emailEdit, passwordEdit;
+    private AppCompatButton loginBtn;
+    private ProgressBar progress;
+    private ShapeableImageView backBtn;
+    private TextView redirectSignup, resetPassword;
+    private ImageView fingerprintIcon;
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() == 1 && next != null) next.requestFocus();
-            }
-        });
-    }
-
-    // Move back on backspace
-    private void moveToPrev(EditText curr, EditText prev) {
-        curr.setOnKeyListener((v, keyCode, event) -> {
-            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL) {
-                if (curr.getText().toString().isEmpty()) {
-                    prev.requestFocus();
-                    prev.setText(""); // optional: clear previous box
-                }
-            }
-            return false;
-        });
-    }
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        // Fetching view IDs
-        TextView redirectSignup = findViewById(R.id.redirectSignup);
-        TextView PinReset = findViewById(R.id.reset);
-        EditText pin1 = findViewById(R.id.pin1);
-        EditText pin2 = findViewById(R.id.pin2);
-        EditText pin3 = findViewById(R.id.pin3);
-        EditText pin4 = findViewById(R.id.pin4);
-        EditText pin5 = findViewById(R.id.pin5);
-        EditText pin6 = findViewById(R.id.pin6);
-        AppCompatButton login = findViewById(R.id.loginBtn);
-        AppCompatEditText email = findViewById(R.id.emailedit);
-        ShapeableImageView back = findViewById(R.id.back_btn);
-        ProgressBar progress = findViewById(R.id.customProgress);
-        ImageView fingerprint = findViewById(R.id.fingerprintico);
+        // --- View Bindings ---
+        emailLayout = findViewById(R.id.emailLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
+        emailEdit = findViewById(R.id.emailedit);
+        passwordEdit = findViewById(R.id.pinInput);
+        loginBtn = findViewById(R.id.loginBtn);
+        progress = findViewById(R.id.customProgress);
+        backBtn = findViewById(R.id.back_btn);
+        redirectSignup = findViewById(R.id.redirectSignup);
+        resetPassword = findViewById(R.id.reset);
+        fingerprintIcon = findViewById(R.id.fingerprintico);
 
-        // getting access to the firebase database....
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // getting the current user for authentication....
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-        // --- PIN fields setup for 6 digits ---
-        pin1.setTransformationMethod(new PasswordTransformationMethod());
-        pin2.setTransformationMethod(new PasswordTransformationMethod());
-        pin3.setTransformationMethod(new PasswordTransformationMethod());
-        pin4.setTransformationMethod(new PasswordTransformationMethod());
-        pin5.setTransformationMethod(new PasswordTransformationMethod());
-        pin6.setTransformationMethod(new PasswordTransformationMethod());
-
-        // Smooth PIN navigation
-        moveToNext(pin1, pin2);
-        moveToNext(pin2, pin3);
-        moveToNext(pin3, pin4);
-        moveToNext(pin4, pin5);
-        moveToNext(pin5, pin6);
-        moveToNext(pin6, null);
-
-        moveToPrev(pin2, pin1);
-        moveToPrev(pin3, pin2);
-        moveToPrev(pin4, pin3);
-        moveToPrev(pin5, pin4);
-        moveToPrev(pin6, pin5);
-
-        // Redirect to signup
+        // --- Redirect to Signup ---
         redirectSignup.setOnClickListener(v -> {
-            Intent moveToSignup = new Intent(Login.this, signup.class);
-            startActivity(moveToSignup);
+            startActivity(new Intent(this, signup.class));
+            finish();
         });
 
-        // LOGIN BUTTON
-        login.setOnClickListener(v -> {
-            progress.setVisibility(View.VISIBLE);
+        // --- Login functionality ---
+        loginBtn.setOnClickListener(v -> handleLogin());
 
-            String pin = pin1.getText().toString().trim() + pin2.getText().toString().trim() + pin3.getText().toString().trim()
-                    + pin4.getText().toString().trim() + pin5.getText().toString().trim() + pin6.getText().toString().trim();
+        // --- Reset Password Dialog ---
+        resetPassword.setOnClickListener(v -> openResetDialog());
 
-            String EnterEmail = email.getText().toString().trim();
-
-            // --- VALIDATION ---
-            if (EnterEmail.isEmpty()) {
-                Toast.makeText(Login.this, "We can’t log you in if you don’t tell us who you are.", Toast.LENGTH_SHORT).show();
-                progress.setVisibility(View.GONE);
-                return;
-            }
-            if (pin.length() != 6) {
-                Toast.makeText(Login.this, "Your PIN’s having an identity crisis — needs 6 digits.", Toast.LENGTH_SHORT).show();
-                progress.setVisibility(View.GONE);
-                return;
-            }
-
-            login.setEnabled(false);
-
-            // --- FIREBASE LOGIN ---
-            auth.signInWithEmailAndPassword(EnterEmail, pin).addOnSuccessListener(authResult -> {
-                String uid = authResult.getUser().getUid();
-
-                // fetching the data for the logged in user and passing it to the dashboard intent
-                db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
-                    login.setEnabled(true);
-                    progress.setVisibility(View.GONE);
-
-                    if (documentSnapshot.exists()) {
-                        String storedPin = documentSnapshot.getString("Pin");
-                        if (pin.equals(storedPin)) {
-                            Toast.makeText(Login.this, "You’re in! The app approves.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Login.this, DashBoard.class);
-                            intent.putExtra("uid", uid);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(Login.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(Login.this, "User doesn't exist.", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(e -> {
-                    login.setEnabled(true);
-                    progress.setVisibility(View.GONE);
-                    Toast.makeText(Login.this, "Error fetching data", Toast.LENGTH_SHORT).show();
-                });
-            }).addOnFailureListener(e -> {
-                login.setEnabled(true);
-                progress.setVisibility(View.GONE);
-                Toast.makeText(Login.this, "Credentials rejected. Even the app has standards.", Toast.LENGTH_SHORT).show();
-            });
+        // --- Back Button ---
+        backBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, chooseLoginSignup.class));
+            finish();
         });
 
+        // --- Setup Biometric ---
+        setupBiometricPrompt();
 
-        // --- PIN RESET ---
-        PinReset.setOnClickListener(v1 -> {
-            Dialog resetDialog = new Dialog(Login.this);
-            resetDialog.setContentView(R.layout.reset_dialog);
-            resetDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            resetDialog.show();
+        // --- Fingerprint Tap Trigger ---
+        fingerprintIcon.setOnClickListener(v -> {
+            String savedEmail = getSharedPreferences("loginPrefs", MODE_PRIVATE).getString("savedEmail", null);
+            String savedPass = getSharedPreferences("loginPrefs", MODE_PRIVATE).getString("savedPass", null);
 
-            // New PIN
-            AppCompatEditText pin1Reset = resetDialog.findViewById(R.id.pin1);
-            AppCompatEditText pin2Reset = resetDialog.findViewById(R.id.pin2);
-            AppCompatEditText pin3Reset = resetDialog.findViewById(R.id.pin3);
-            AppCompatEditText pin4Reset = resetDialog.findViewById(R.id.pin4);
-            AppCompatEditText pin5Reset = resetDialog.findViewById(R.id.pin5);
-            AppCompatEditText pin6Reset = resetDialog.findViewById(R.id.pin6);
-
-            // Confirm PIN
-            AppCompatEditText pin_1Reset = resetDialog.findViewById(R.id.pin_1);
-            AppCompatEditText pin_2Reset = resetDialog.findViewById(R.id.pin_2);
-            AppCompatEditText pin_3Reset = resetDialog.findViewById(R.id.pin_3);
-            AppCompatEditText pin_4Reset = resetDialog.findViewById(R.id.pin_4);
-            AppCompatEditText pin_5Reset = resetDialog.findViewById(R.id.pin_5);
-            AppCompatEditText pin_6Reset = resetDialog.findViewById(R.id.pin_6);
-
-            // Phone number
-            AppCompatEditText phone = resetDialog.findViewById(R.id.phonetxt);
-
-            AppCompatButton confirmBtn = resetDialog.findViewById(R.id.confirmBtn);
-            AppCompatButton cancelBtn = resetDialog.findViewById(R.id.cancelBtn);
-
-            // Hide digits for both new and confirm PIN fields
-            pin1Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin2Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin3Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin4Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin5Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin6Reset.setTransformationMethod(new PasswordTransformationMethod());
-
-            pin_1Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin_2Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin_3Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin_4Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin_5Reset.setTransformationMethod(new PasswordTransformationMethod());
-            pin_6Reset.setTransformationMethod(new PasswordTransformationMethod());
-
-            // Enable smooth PIN navigation for both new and confirm PINs
-            moveToNext(pin1Reset, pin2Reset);
-            moveToNext(pin2Reset, pin3Reset);
-            moveToNext(pin3Reset, pin4Reset);
-            moveToNext(pin4Reset, pin5Reset);
-            moveToNext(pin5Reset, pin6Reset);
-            moveToPrev(pin2Reset, pin1Reset);
-            moveToPrev(pin3Reset, pin2Reset);
-            moveToPrev(pin4Reset, pin3Reset);
-            moveToPrev(pin5Reset, pin4Reset);
-            moveToPrev(pin6Reset, pin5Reset);
-
-            moveToNext(pin_1Reset, pin_2Reset);
-            moveToNext(pin_2Reset, pin_3Reset);
-            moveToNext(pin_3Reset, pin_4Reset);
-            moveToNext(pin_4Reset, pin_5Reset);
-            moveToNext(pin_5Reset, pin_6Reset);
-            moveToPrev(pin_2Reset, pin_1Reset);
-            moveToPrev(pin_3Reset, pin_2Reset);
-            moveToPrev(pin_4Reset, pin_3Reset);
-            moveToPrev(pin_5Reset, pin_4Reset);
-            moveToPrev(pin_6Reset, pin_5Reset);
-
-            // Cancel button
-            cancelBtn.setOnClickListener(view -> resetDialog.dismiss());
-
-            // Confirm button
-            confirmBtn.setOnClickListener(view -> {
-                String phonenum = phone.getText().toString().trim();
-                String newpin = pin1Reset.getText().toString().trim() + pin2Reset.getText().toString().trim() +
-                        pin3Reset.getText().toString().trim() + pin4Reset.getText().toString().trim() +
-                        pin5Reset.getText().toString().trim() + pin6Reset.getText().toString().trim();
-
-                String confirmPin = pin_1Reset.getText().toString().trim() + pin_2Reset.getText().toString().trim() +
-                        pin_3Reset.getText().toString().trim() + pin_4Reset.getText().toString().trim() +
-                        pin_5Reset.getText().toString().trim() + pin_6Reset.getText().toString().trim();
-
-                if (phonenum.isEmpty()) {
-                    Toast.makeText(Login.this, "Empty fields won’t reset anything, pal", Toast.LENGTH_SHORT).show();
-                    return;
+            if (savedEmail != null && savedPass != null) {
+                if (isBiometricAvailable()) {
+                    biometricPrompt.authenticate(promptInfo);
+                } else {
+                    Toast.makeText(this, "No biometrics? What is this, 2010?", Toast.LENGTH_SHORT).show();
                 }
-
-                if (!newpin.equals(confirmPin)) {
-                    Toast.makeText(Login.this, "New PINs should match. It’s not a competition.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                db.collection("users").whereEqualTo("Phone", phonenum).get().addOnSuccessListener(querySnapshot -> {
-                    if (!querySnapshot.isEmpty()) {
-                        DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                        db.collection("users").document(document.getId()).update("Pin", newpin)
-                                .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(Login.this, "PIN updated! Try not to forget it this time.", Toast.LENGTH_SHORT)
-                                    .show();
-                            resetDialog.dismiss();
-                        }).addOnFailureListener(e -> Toast.makeText(Login.this, "Try again", Toast.LENGTH_SHORT)
-                                        .show());
-                    } else {
-                        Toast.makeText(Login.this, "If this is your number, Firestore strongly disagrees.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-            });
-        });
-
-        fingerprint.setOnClickListener(v -> {
-            String enteredEmail = email.getText().toString().trim();
-            if (enteredEmail.isEmpty()) {
-                Toast.makeText(Login.this,
-                        "🤨 You forgot the email. Even your fingerprint’s confused.",
-                        Toast.LENGTH_SHORT).show();
-                return;
+            } else {
+                Toast.makeText(this, "Backing out already? Commitment issues?", Toast.LENGTH_SHORT).show();
             }
-
-            // Fetch user by email
-            db.collection("users")
-                    .whereEqualTo("Email", enteredEmail)
-                    .get()
-                    .addOnSuccessListener(querySnapshot -> {
-                        if (!querySnapshot.isEmpty()) {
-                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                            Boolean biometricEnabled = document.getBoolean("Biometric Functionality");
-
-                            if (biometricEnabled != null && biometricEnabled) {
-                                BiometricManager biometricManager = BiometricManager.from(Login.this);
-                                int canAuth = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG);
-
-                                if (canAuth == BiometricManager.BIOMETRIC_SUCCESS) {
-                                    showBiometricPromptForLogin(enteredEmail, document.getString("Pin"));
-                                } else if (canAuth == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
-                                    Toast.makeText(Login.this,
-                                            "📱 No fingerprints found — maybe try registering one?",
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(Login.this,
-                                            "🧊 Your device just said ‘nope’ to biometrics.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(Login.this,
-                                        "🔓 App Lock is off — passwords still have a job, apparently.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(Login.this,
-                                    "🤷 No account found with that email. Try typing, maybe?",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(Login.this,
-                                    "☠️ Firestore’s feeling moody. Try again.",
-                                    Toast.LENGTH_SHORT).show()
-                    );
-        });
-
-        back.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
-                Intent backTochoose = new Intent(Login.this,chooseLoginSignup.class);
-                startActivity(backTochoose);
-
-           }
         });
     }
-    private void showBiometricPromptForLogin(String email, String pin) {
+
+    // ------------------------- LOGIN HANDLER -------------------------
+    private void handleLogin() {
+        progress.setVisibility(View.VISIBLE);
+        loginBtn.setEnabled(false);
+
+        String enteredEmail = emailEdit.getText() != null ? emailEdit.getText().toString().trim().toLowerCase() : "";
+        String enteredPass = passwordEdit.getText() != null ? passwordEdit.getText().toString().trim() : "";
+
+        if (enteredEmail.isEmpty()) {
+            Toast.makeText(this, "You forgot your email. Again?", Toast.LENGTH_SHORT).show();
+            resetProgress();
+            return;
+        }
+
+        if (enteredPass.isEmpty()) {
+            Toast.makeText(this, "Typing a password would really help.", Toast.LENGTH_SHORT).show();
+            resetProgress();
+            return;
+        }
+//      ----- using firestore auth login system -----
+        auth.signInWithEmailAndPassword(enteredEmail, enteredPass)
+                .addOnSuccessListener(authResult -> {       // auth result will contain the object reference of the
+                    // user created with the provided credentials
+                    resetProgress();        //  changes the visibility of progress bar to GONE and login button is set to enabled = true....
+                    Toast.makeText(this, "Well, look who decided to come back.", Toast.LENGTH_SHORT).show();
+
+                    // Save credentials for biometric login
+                    getSharedPreferences("loginPrefs", MODE_PRIVATE)
+                            .edit()
+                            .putString("savedEmail", enteredEmail)
+                            .putString("savedPass", enteredPass)
+                            .apply();
+
+                    navigateToDashboard();
+                })
+                .addOnFailureListener(e -> {
+                    resetProgress();
+                    String msg = e.getMessage() != null ? e.getMessage() : "";
+                    if (msg.contains("no user record")) {
+                        Toast.makeText(this, "No account? Guess you imagined signing up.", Toast.LENGTH_SHORT).show();
+                    } else if (msg.contains("password is invalid")) {
+                        Toast.makeText(this, "Nice try. Password’s not even close.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Something broke. Probably not your fault… probably.️", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // ------------------------- RESET PASSWORD HANDLER -------------------------
+    private void openResetDialog() {
+        Dialog resetDialog = new Dialog(this);
+        resetDialog.setContentView(R.layout.reset_dialog);
+        resetDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        resetDialog.show();
+
+        AppCompatEditText emailField = resetDialog.findViewById(R.id.emailtxt);
+        AppCompatButton confirmBtn = resetDialog.findViewById(R.id.confirmBtn);
+        AppCompatButton cancelBtn = resetDialog.findViewById(R.id.cancelBtn);
+
+        cancelBtn.setOnClickListener(view -> resetDialog.dismiss());
+
+//        ---- Normalizing the mail address to remove unwanted hidden spaces and special characters ----
+        confirmBtn.setOnClickListener(view -> {
+            String enteredEmail = emailField.getText() != null
+                    ? emailField.getText().toString().trim()
+                    .replaceAll("\\s+", "")
+                    .replaceAll("[\\u200B-\\u200D\\uFEFF]", "")
+                    .toLowerCase()
+                    : "";
+
+            if (enteredEmail.isEmpty()) {
+                Toast.makeText(this, "Enter your email. Telepathy doesn’t work here.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            auth.sendPasswordResetEmail(enteredEmail)
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(this, "Reset link sent. Check inbox… or that Spam graveyard.", Toast.LENGTH_LONG).show();
+                        resetDialog.dismiss();
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this, "Couldn’t send it. Maybe your email’s in witness protection" + e.getMessage(), Toast.LENGTH_SHORT).show());
+        });
+    }
+
+    // ------------------------- BIOMETRIC -------------------------
+    private void setupBiometricPrompt() {
         Executor executor = ContextCompat.getMainExecutor(this);
-        BiometricPrompt biometricPrompt = new BiometricPrompt(this, executor,
+        biometricPrompt = new BiometricPrompt(Login.this, executor,
                 new BiometricPrompt.AuthenticationCallback() {
                     @Override
-                    public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                    public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
+                        Toast.makeText(Login.this, "Fingerprint accepted. You may pass, oh chosen one.", Toast.LENGTH_SHORT).show();
 
-                        FirebaseAuth.getInstance()
-                                .signInWithEmailAndPassword(email, pin)
-                                .addOnSuccessListener(authResult -> {
-                                    Toast.makeText(Login.this,
-                                            "🔓 Welcome back, hacker. Fingerprint accepted.",
-                                            Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(Login.this, DashBoard.class));
-                                    finish();
-                                })
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(Login.this,
-                                                "💀 Authentication failed. Even your fingerprint betrayed you.",
-                                                Toast.LENGTH_SHORT).show()
-                                );
-                    }
+                        // Fetch saved credentials
+                        String savedEmail = getSharedPreferences("loginPrefs", MODE_PRIVATE)
+                                .getString("savedEmail", null);
+                        String savedPass = getSharedPreferences("loginPrefs", MODE_PRIVATE)
+                                .getString("savedPass", null);
 
-                    @Override
-                    public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                        super.onAuthenticationError(errorCode, errString);
-                        Toast.makeText(Login.this,
-                                "💀 " + errString + " — even your fingerprint gave up.",
-                                Toast.LENGTH_SHORT).show();
+                        if (savedEmail != null && savedPass != null) {
+                            auth.signInWithEmailAndPassword(savedEmail, savedPass)
+                                    .addOnSuccessListener(authResult -> {
+                                        navigateToDashboard();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(Login.this, "Re-login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        } else {
+                            Toast.makeText(Login.this, "No saved login found. Maybe try logging in first, genius.", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onAuthenticationFailed() {
                         super.onAuthenticationFailed();
-                        Toast.makeText(Login.this,
-                                "🙃 Wrong finger, or maybe wrong life choices.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Nope. That’s not you. Try the real finger", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationError(int errorCode, CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                        Toast.makeText(Login.this, "Biometric system had a meltdown. Try again before it throws a tantrum" + errString, Toast.LENGTH_SHORT).show();
                     }
                 });
 
-        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Fingerprint Login")
-                .setSubtitle("Prove you’re the real you, not a clone")
-                .setNegativeButtonText("Cancel, I like typing passwords")
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Unlock with Fingerprint")
+                .setSubtitle("Use biometric authentication to access your Ledger")
+                .setNegativeButtonText("Cancel")
                 .build();
-
-        biometricPrompt.authenticate(promptInfo);
     }
 
+    private boolean isBiometricAvailable() {
+        BiometricManager biometricManager = BiometricManager.from(this);
+        return biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                == BiometricManager.BIOMETRIC_SUCCESS;
+    }
+
+    private void navigateToDashboard() {
+        startActivity(new Intent(this, DashBoard.class));
+        finish();
+    }
+
+    // ------------------------- HELPERS -------------------------
+    private void resetProgress() {
+        progress.setVisibility(View.GONE);
+        loginBtn.setEnabled(true);
+    }
 }
