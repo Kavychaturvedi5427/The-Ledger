@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/background_gradient"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/main"
@@ -20,14 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="9dp">
-
+            app:cardElevation="9dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp">
 
+                <!-- App Icon -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mainimg"
                     android:layout_width="77dp"
@@ -35,6 +35,7 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/icon" />
 
+                <!-- Welcome Text -->
                 <TextView
                     android:id="@+id/welcome"
                     android:layout_width="wrap_content"
@@ -46,7 +47,7 @@
                     android:text="@string/Welcome"
                     android:textSize="20sp" />
 
-                <!-- Divider below welcome -->
+                <!-- Divider -->
                 <View
                     android:id="@+id/top_divider"
                     android:layout_width="match_parent"
@@ -65,11 +66,8 @@
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/lexend"
                     android:text="@string/EnterDetailsLogin"
-
-
                     android:textSize="15sp" />
 
-                <!-- Divider below enter -->
                 <View
                     android:id="@+id/second"
                     android:layout_width="match_parent"
@@ -78,6 +76,7 @@
                     android:layout_marginVertical="8dp"
                     android:background="#BDBDBD" />
 
+                <!-- NAME -->
                 <TextView
                     android:id="@+id/Entername"
                     android:layout_width="wrap_content"
@@ -85,115 +84,149 @@
                     android:layout_below="@id/second"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/lexend"
                     android:text="@string/nameLogin"
-
                     android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/nametext"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/Entername"
-                    android:hint="Enter Your Full Name"
-                    android:textSize="12sp" />
+                    android:hint="Enter Your Full Name">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nametext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- EMAIL -->
                 <TextView
                     android:id="@+id/Enteremail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/nametext"
+                    android:layout_below="@id/nameLayout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/lexend"
                     android:text="Email ID"
-
                     android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/emailtxt"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/Enteremail"
-                    android:hint="Enter your Email ID"
-                    android:textSize="12sp" />
+                    android:hint="Enter your Email ID">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailtxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:inputType="textEmailAddress"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- PHONE -->
                 <TextView
                     android:id="@+id/EnterPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/emailtxt"
+                    android:layout_below="@id/emailLayout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/lexend"
                     android:text="Phone Number"
-
                     android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/phonetxt"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phoneLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/EnterPhone"
-                    android:hint="Enter your Phone number"
-                    android:textSize="12sp" />
+                    android:hint="Enter your Phone number">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phonetxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- PASSWORD -->
                 <TextView
                     android:id="@+id/EnterPin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/phonetxt"
+                    android:layout_below="@id/phoneLayout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/lexend"
-                    android:text="Pin"
-
+                    android:text="Password"
                     android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/pintxt"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/EnterPin"
-                    android:hint="Enter 6-digit PIN"
-                    android:inputType="numberPassword"
-                    android:maxLength="6"
-                    android:textSize="12sp" />
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/black"
+                    android:hint="Enter password">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/pintxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLength="10"
+                        android:fontFamily="@font/lexend"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- SIGNUP BUTTON -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/signupbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pintxt"
+                    android:layout_below="@id/passwordLayout"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
                     android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
-                    android:text="Sign UP"
+                    android:text="Sign Up"
                     android:textSize="15sp" />
+
+                <!-- PROGRESS -->
                 <ProgressBar
                     android:id="@+id/customProgress"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:indeterminate="true"
-                    android:progressDrawable="@drawable/custom_progress"
-                    android:indeterminateDrawable="@drawable/custom_progress"
                     android:layout_centerInParent="true"
-                    android:visibility="gone"/>
+                    android:indeterminate="true"
+                    android:indeterminateDrawable="@drawable/custom_progress"
+                    android:visibility="gone" />
 
+                <!-- BACK BUTTON -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/backbtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_below="@id/signupbtn"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/back"
-                    />
-
+                    android:src="@drawable/back" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
