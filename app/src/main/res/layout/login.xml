@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/loginsubtext"
-                    android:layout_marginVertical="8dp"
+                    android:layout_marginVertical="10dp"
                     android:background="@color/black" />
 
                 <!-- Email Label -->
@@ -196,8 +196,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/reset"
-                    android:layout_marginVertical="2dp"
-                    android:background="#BDBDBD" />
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/black" />
 
                 <!-- Signup Redirect -->
                 <TextView

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,74 +18,106 @@
             android:id="@+id/mainCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="9dp"
-            >
+            app:cardCornerRadius="20dp"
+            app:cardElevation="12dp"
+            android:background="@drawable/cards_bg"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:animateLayoutChanges="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                android:padding="20dp">
 
+                <!-- 🪙 App Icon -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mainimg"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
-                    android:src="@drawable/icon" />
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/icon"
+                    android:visibility="invisible" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <!-- 📘 App Name -->
+                <TextView
                     android:id="@+id/appname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/mainimg"
+                    android:layout_below="@id/mainimg"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/lexend"
                     android:text="The Ledger"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/loginBTN"
-                    android:layout_width="150dp"
+                <!-- 💬 Tagline -->
+                <TextView
+                    android:id="@+id/appTagline"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/appname"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/lavender"
-                    android:padding="4dp"
-                    android:text="@string/loginBtn" />
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/cavet"
+                    android:text="Because numbers never lie."
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
 
+                <!-- 🔑 Login Button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/loginBTN"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/appTagline"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/lavender"
+                    android:fontFamily="@font/lexend"
+                    android:text="ALREADY A CUSTOMER?\nLOGIN"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingVertical="8dp"
+                    android:elevation="4dp"
+                    android:visibility="invisible" />
+
+                <!-- 🧾 Signup Button -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/signupbtn"
-                    android:layout_width="150dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/loginBTN"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@color/lavender"
-                    android:padding="4dp"
-                    android:text="@string/signUpBtn" />
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/lavender"
+                    android:fontFamily="@font/lexend"
+                    android:text="NEW CUSTOMER?\nSIGN UP"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingVertical="8dp"
+                    android:elevation="4dp"
+                    android:visibility="invisible" />
 
+                <!-- ❌ Exit Icon -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/exit"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/userexit"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_below="@id/signupbtn"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    />
-
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/userexit"
+                    android:visibility="invisible" />
 
             </RelativeLayout>
-
-
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 </ScrollView>

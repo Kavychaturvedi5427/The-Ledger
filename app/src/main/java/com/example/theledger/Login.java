@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -56,9 +58,28 @@ public class Login extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        // -------------------- ✨ ANIMATIONS --------------------
+        Animation fadeZoom = AnimationUtils.loadAnimation(this, R.anim.fade_zoom);
+        Animation fadeInSlow = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
+        View logo = findViewById(R.id.mainimg);
+        if (logo != null) {
+            logo.startAnimation(fadeZoom);
+        }
+
+        // Removed animations for email and password fields
+        // Keep subtle animation for buttons and icons only
+        loginBtn.postDelayed(() -> loginBtn.startAnimation(fadeInSlow), 300);
+        fingerprintIcon.postDelayed(() -> fingerprintIcon.startAnimation(fadeInSlow), 400);
+        resetPassword.postDelayed(() -> resetPassword.startAnimation(fadeIn), 500);
+        redirectSignup.postDelayed(() -> redirectSignup.startAnimation(fadeIn), 600);
+        backBtn.postDelayed(() -> backBtn.startAnimation(fadeInSlow), 700);
+
         // --- Redirect to Signup ---
         redirectSignup.setOnClickListener(v -> {
             startActivity(new Intent(this, signup.class));
+            overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
             finish();
         });
 
@@ -71,6 +92,7 @@ public class Login extends AppCompatActivity {
         // --- Back Button ---
         backBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, chooseLoginSignup.class));
+            overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
             finish();
         });
 
@@ -113,11 +135,10 @@ public class Login extends AppCompatActivity {
             resetProgress();
             return;
         }
-//      ----- using firestore auth login system -----
+
         auth.signInWithEmailAndPassword(enteredEmail, enteredPass)
-                .addOnSuccessListener(authResult -> {       // auth result will contain the object reference of the
-                    // user created with the provided credentials
-                    resetProgress();        //  changes the visibility of progress bar to GONE and login button is set to enabled = true....
+                .addOnSuccessListener(authResult -> {
+                    resetProgress();
                     Toast.makeText(this, "Well, look who decided to come back.", Toast.LENGTH_SHORT).show();
 
                     // Save credentials for biometric login
@@ -155,7 +176,6 @@ public class Login extends AppCompatActivity {
 
         cancelBtn.setOnClickListener(view -> resetDialog.dismiss());
 
-//        ---- Normalizing the mail address to remove unwanted hidden spaces and special characters ----
         confirmBtn.setOnClickListener(view -> {
             String enteredEmail = emailField.getText() != null
                     ? emailField.getText().toString().trim()
@@ -175,7 +195,7 @@ public class Login extends AppCompatActivity {
                         resetDialog.dismiss();
                     })
                     .addOnFailureListener(e ->
-                            Toast.makeText(this, "Couldn’t send it. Maybe your email’s in witness protection" + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            Toast.makeText(this, "Couldn’t send it. Maybe your email’s in witness protection " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
     }
 
@@ -189,7 +209,6 @@ public class Login extends AppCompatActivity {
                         super.onAuthenticationSucceeded(result);
                         Toast.makeText(Login.this, "Fingerprint accepted. You may pass, oh chosen one.", Toast.LENGTH_SHORT).show();
 
-                        // Fetch saved credentials
                         String savedEmail = getSharedPreferences("loginPrefs", MODE_PRIVATE)
                                 .getString("savedEmail", null);
                         String savedPass = getSharedPreferences("loginPrefs", MODE_PRIVATE)
@@ -197,12 +216,9 @@ public class Login extends AppCompatActivity {
 
                         if (savedEmail != null && savedPass != null) {
                             auth.signInWithEmailAndPassword(savedEmail, savedPass)
-                                    .addOnSuccessListener(authResult -> {
-                                        navigateToDashboard();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(Login.this, "Re-login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    });
+                                    .addOnSuccessListener(authResult -> navigateToDashboard())
+                                    .addOnFailureListener(e ->
+                                            Toast.makeText(Login.this, "Re-login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                         } else {
                             Toast.makeText(Login.this, "No saved login found. Maybe try logging in first, genius.", Toast.LENGTH_SHORT).show();
                         }
@@ -211,13 +227,13 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onAuthenticationFailed() {
                         super.onAuthenticationFailed();
-                        Toast.makeText(Login.this, "Nope. That’s not you. Try the real finger", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Nope. That’s not you. Try the real finger.", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAuthenticationError(int errorCode, CharSequence errString) {
                         super.onAuthenticationError(errorCode, errString);
-                        Toast.makeText(Login.this, "Biometric system had a meltdown. Try again before it throws a tantrum" + errString, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Biometric system had a meltdown. Try again. " + errString, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -236,6 +252,7 @@ public class Login extends AppCompatActivity {
 
     private void navigateToDashboard() {
         startActivity(new Intent(this, DashBoard.class));
+        overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
         finish();
     }
 

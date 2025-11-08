@@ -2,10 +2,10 @@ package com.example.theledger;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.style.TabStopSpan;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -54,14 +54,39 @@ public class signup extends AppCompatActivity {
         progress = findViewById(R.id.customProgress);
         backBtn = findViewById(R.id.backbtn);
 
-        // --- Firebase Instances ---
+        // Firebase
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        // --- ✨ Animations ---
+        Animation fadeZoom = AnimationUtils.loadAnimation(this, R.anim.fade_zoom);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation fadeInSlow = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
+
+        View logo = findViewById(R.id.mainimg);
+        View welcome = findViewById(R.id.welcome);
+        View enter = findViewById(R.id.Enter);
+
+        // Logo + Welcome animation
+        logo.startAnimation(fadeZoom);
+        welcome.startAnimation(fadeIn);
+        enter.startAnimation(fadeInSlow);
+
+        // Sequential form field animations (slight delay)
+        nameLayout.postDelayed(() -> nameLayout.startAnimation(fadeIn), 200);
+        emailLayout.postDelayed(() -> emailLayout.startAnimation(fadeIn), 300);
+        phoneLayout.postDelayed(() -> phoneLayout.startAnimation(fadeIn), 400);
+        passwordLayout.postDelayed(() -> passwordLayout.startAnimation(fadeIn), 500);
+
+        // Buttons and back
+        signupBtn.postDelayed(() -> signupBtn.startAnimation(fadeInSlow), 600);
+        backBtn.postDelayed(() -> backBtn.startAnimation(fadeInSlow), 700);
+
         // --- Back Button ---
         backBtn.setOnClickListener(v -> {
-            Toast.makeText(this,"Retreating, huh? Not ready for commitment?",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Retreating, huh? Not ready for commitment?", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, chooseLoginSignup.class));
+            overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
             finish();
         });
 
@@ -93,7 +118,7 @@ public class signup extends AppCompatActivity {
             return;
         }
 
-        // Password validation (letters + numbers, 6+ chars)
+        // Password validation
         if (!Pin.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@#$%!]{6,}$")) {
             showError("That password’s so weak it probably skips leg day.");
             return;
@@ -127,24 +152,14 @@ public class signup extends AppCompatActivity {
                             .set(user)
                             .addOnSuccessListener(unused -> {
                                 Toast.makeText(this, "Stored safely. Try not to forget your own data now.", Toast.LENGTH_SHORT).show();
-
-//                                No need for this now ..... for debugging purpose only.....
-                                // Debug Provider Check
-//                                auth.fetchSignInMethodsForEmail(Email)
-//                                        .addOnSuccessListener(result ->
-//                                                Log.d("SIGNUP_DEBUG", "Providers for " + Email + ": " + result.getSignInMethods()))
-//                                        .addOnFailureListener(e ->
-//                                                Log.e("SIGNUP_DEBUG", "Provider fetch failed: " + e.getMessage()));
-
                                 clearFields();
                                 resetProgress();
                                 Toast.makeText(this, "Off you go. Don’t mess up your new account already.", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(this, chooseLoginSignup.class));
+                                overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
                                 finish();
                             })
-                            .addOnFailureListener(e -> {
-                                showError("Firestore took one look and said ‘nope \uD83D\uDC80");
-                            });
+                            .addOnFailureListener(e -> showError("Firestore took one look and said ‘nope 💀"));
                 })
                 .addOnFailureListener(e -> {
                     if (e.getMessage() != null && e.getMessage().contains("already in use")) {
@@ -153,14 +168,6 @@ public class signup extends AppCompatActivity {
                         showError("Firebase ghosted you. Typical.");
                     }
                 });
-
-//        No need for this.... for debugging purpose only.....
-//        Extra Debug Log
-//        auth.fetchSignInMethodsForEmail(Email)
-//                .addOnSuccessListener(r -> Log.d("SIGNUP_CHECK",
-//                        "After signup, providers for " + Email + ": " + r.getSignInMethods()))
-//                .addOnFailureListener(e ->
-//                        Log.e("SIGNUP_CHECK", "Failed to fetch after signup: " + e.getMessage()));
     }
 
     private void clearFields() {
