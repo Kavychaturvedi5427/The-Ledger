@@ -2,112 +2,181 @@ package com.example.theledger;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.style.TabStopSpan;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class signup extends AppCompatActivity {
+
+    // UI components
+    private TextInputLayout nameLayout, emailLayout, phoneLayout, passwordLayout;
+    private TextInputEditText name, email, phone, pin;
+    private AppCompatButton signupBtn;
+    private ProgressBar progress;
+    private ShapeableImageView backBtn;
+
+    // Firebase
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        // finding id's of the text group and sign up button....
-        AppCompatEditText name = findViewById(R.id.nametext);
-        AppCompatEditText email = findViewById(R.id.emailtxt);
-        AppCompatEditText phone = findViewById(R.id.phonetxt);
-        AppCompatEditText pin = findViewById(R.id.pintxt);
-        AppCompatButton signup = findViewById(R.id.signupbtn);
-        ProgressBar progress = findViewById(R.id.customProgress);
-        ShapeableImageView backBtn = findViewById(R.id.backbtn);
+        // --- Initialize Views ---
+        nameLayout = findViewById(R.id.nameLayout);
+        emailLayout = findViewById(R.id.emailLayout);
+        phoneLayout = findViewById(R.id.phoneLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
 
-        // Back button functionality
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent backTochoose = new Intent(getApplicationContext(), chooseLoginSignup.class);
-                startActivity(backTochoose);
-            }
+        name = findViewById(R.id.nametext);
+        email = findViewById(R.id.emailtxt);
+        phone = findViewById(R.id.phonetxt);
+        pin = findViewById(R.id.pintxt);
+        signupBtn = findViewById(R.id.signupbtn);
+        progress = findViewById(R.id.customProgress);
+        backBtn = findViewById(R.id.backbtn);
+
+        // --- Firebase Instances ---
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        // --- Back Button ---
+        backBtn.setOnClickListener(v -> {
+            Toast.makeText(this,"Retreating, huh? Not ready for commitment?",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, chooseLoginSignup.class));
+            finish();
         });
 
-        // connecting to the database....
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // for authentication....
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        // --- Signup Button ---
+        signupBtn.setOnClickListener(v -> handleSignup());
+    }
 
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progress.setVisibility(View.VISIBLE);
+    private void handleSignup() {
+        progress.setVisibility(View.VISIBLE);
+        signupBtn.setEnabled(false);
 
-                String Name = name.getText().toString().trim();
-                String Email = email.getText().toString().trim();
-                String Phone = phone.getText().toString().trim();
-                String Pin = pin.getText().toString().trim();
+        // --- Get Inputs ---
+        String Name = name.getText() != null ? name.getText().toString().trim() : "";
+        String Email = email.getText() != null ? email.getText().toString().trim()
+                .replaceAll("\\s+", "")
+                .replaceAll("[\\u200B-\\u200D\\uFEFF]", "")
+                .toLowerCase() : "";
+        String Phone = phone.getText() != null ? phone.getText().toString().trim() : "";
+        String Pin = pin.getText() != null ? pin.getText().toString().trim() : "";
 
-                // Check for empty fields
-                if (Name.isEmpty() || Email.isEmpty() || Phone.isEmpty() || Pin.isEmpty()) {
-                    Toast.makeText(signup.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                    progress.setVisibility(View.GONE);
-                    return;
-                }
+        // --- Input Validation ---
+        if (Name.isEmpty() || Email.isEmpty() || Phone.isEmpty() || Pin.isEmpty()) {
+            showError("Leaving blanks? Planning to sign up telepathically?");
+            return;
+        }
 
-                // Firebase requires password with at least 6 characters
-                if (Pin.length() < 6) {
-                    Toast.makeText(signup.this, "PIN must be at least 6 digits", Toast.LENGTH_SHORT).show();
-                    progress.setVisibility(View.GONE);
-                    return;
-                }
+        if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+            showError("That’s not even an email… unless Gmail suddenly lowered its standards.");
+            return;
+        }
 
-                // Create user with email and password
-                auth.createUserWithEmailAndPassword(Email, Pin)
-                        .addOnSuccessListener(authResult -> {
-                            // storing the data in the hashmap....
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("Name", Name);
-                            user.put("Email", Email);
-                            user.put("Phone", Phone);
-                            user.put("Pin", Pin);
+        // Password validation (letters + numbers, 6+ chars)
+        if (!Pin.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@#$%!]{6,}$")) {
+            showError("That password’s so weak it probably skips leg day.");
+            return;
+        }
 
-                            // this will get the uid of the user who just signed up.....
-                            String uid = authResult.getUser().getUid();
-                            // will store the data in the database ......
-                            db.collection("users").document(uid)
-                                    .set(user)
-                                    .addOnSuccessListener(documentReference -> {
-                                        Toast.makeText(getApplicationContext(), "User Added Successfully", Toast.LENGTH_SHORT).show();
-                                        // resetting the Entry field after the registration....
-                                        name.setText("");
-                                        email.setText("");
-                                        phone.setText("");
-                                        pin.setText("");
-                                        progress.setVisibility(View.GONE);
-                                        Intent backtoChoose = new Intent(signup.this, chooseLoginSignup.class);
-                                        startActivity(backtoChoose);
-                                        finish();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(getApplicationContext(), "Try Again: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        progress.setVisibility(View.GONE);
-                                    });
-                        })
-                        .addOnFailureListener(e -> {
-                            // Handle Firebase Auth failure (weak password, invalid email, etc.)
-                            Toast.makeText(signup.this, "Sign up failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            progress.setVisibility(View.GONE);
-                        });
-            }
-        });
+        if (Phone.length() < 10) {
+            showError("Ten digits. It’s not rocket science, Einstein.");
+            return;
+        }
+
+        // --- Create Firebase User ---
+        auth.createUserWithEmailAndPassword(Email, Pin)
+                .addOnSuccessListener(authResult -> {
+                    FirebaseUser currentUser = authResult.getUser();
+                    if (currentUser == null) {
+                        showError("Congrats, you just broke logic. Try again");
+                        return;
+                    }
+
+                    String uid = currentUser.getUid();
+                    Toast.makeText(this, "Finally, you exist. Humanity has been waiting.", Toast.LENGTH_SHORT).show();
+
+                    // --- Save to Firestore ---
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("Name", Name);
+                    user.put("Email", Email);
+                    user.put("Phone", Phone);
+                    user.put("createdAt", System.currentTimeMillis());
+
+                    db.collection("users").document(uid)
+                            .set(user)
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(this, "Stored safely. Try not to forget your own data now.", Toast.LENGTH_SHORT).show();
+
+//                                No need for this now ..... for debugging purpose only.....
+                                // Debug Provider Check
+//                                auth.fetchSignInMethodsForEmail(Email)
+//                                        .addOnSuccessListener(result ->
+//                                                Log.d("SIGNUP_DEBUG", "Providers for " + Email + ": " + result.getSignInMethods()))
+//                                        .addOnFailureListener(e ->
+//                                                Log.e("SIGNUP_DEBUG", "Provider fetch failed: " + e.getMessage()));
+
+                                clearFields();
+                                resetProgress();
+                                Toast.makeText(this, "Off you go. Don’t mess up your new account already.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(this, chooseLoginSignup.class));
+                                finish();
+                            })
+                            .addOnFailureListener(e -> {
+                                showError("Firestore took one look and said ‘nope \uD83D\uDC80");
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    if (e.getMessage() != null && e.getMessage().contains("already in use")) {
+                        showError("That email’s taken. Try adding a random number like everyone else.");
+                    } else {
+                        showError("Firebase ghosted you. Typical.");
+                    }
+                });
+
+//        No need for this.... for debugging purpose only.....
+//        Extra Debug Log
+//        auth.fetchSignInMethodsForEmail(Email)
+//                .addOnSuccessListener(r -> Log.d("SIGNUP_CHECK",
+//                        "After signup, providers for " + Email + ": " + r.getSignInMethods()))
+//                .addOnFailureListener(e ->
+//                        Log.e("SIGNUP_CHECK", "Failed to fetch after signup: " + e.getMessage()));
+    }
+
+    private void clearFields() {
+        name.setText("");
+        email.setText("");
+        phone.setText("");
+        pin.setText("");
+    }
+
+    private void showError(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        resetProgress();
+    }
+
+    private void resetProgress() {
+        progress.setVisibility(View.GONE);
+        signupBtn.setEnabled(true);
     }
 }
