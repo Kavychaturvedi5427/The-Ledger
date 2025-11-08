@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:fitsSystemWindows="true">
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/navbarShadowContainer"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- 🧾 TRANSACTIONS CARD -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Trasac_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/mainHeadtxn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/lexend"
+                        android:text="Transactions"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_toEndOf="@id/mainHeadtxn"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/transacanim"
+                        />
+
+                    <TextView
+                        android:id="@+id/subHeadtxn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mainHeadtxn"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/cavet"
+                        android:text="Last 3 transactions"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/div1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/subHeadtxn"
+                        android:layout_marginVertical="8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/div1"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/txn1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Txn1"
+                            android:fontFamily="@font/lexend"
+                            android:textSize="17sp"
+                            android:layout_margin="6dp" />
+
+                        <TextView
+                            android:id="@+id/txn2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Txn2"
+                            android:fontFamily="@font/lexend"
+                            android:textSize="17sp"
+                            android:layout_margin="6dp" />
+
+                        <TextView
+                            android:id="@+id/txn3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Txn3"
+                            android:fontFamily="@font/lexend"
+                            android:textSize="17sp"
+                            android:layout_margin="6dp" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 💵 BALANCE CARD -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/balance_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/mainHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/lexend"
+                        android:text="Balance"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_toEndOf="@id/subHead"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/balance" />
+
+                    <TextView
+                        android:id="@+id/subHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mainHead"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/cavet"
+                        android:text="Recent Balance Topups"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/div2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/subHead"
+                        android:layout_marginVertical="8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/div2"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/bal1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bal1"
+                            android:fontFamily="@font/lexend"
+                            android:textSize="17sp"
+                            android:layout_margin="6dp" />
+
+                        <TextView
+                            android:id="@+id/bal2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bal2"
+                            android:fontFamily="@font/lexend"
+                            android:textSize="17sp"
+                            android:layout_margin="6dp" />
+
+                        <TextView
+                            android:id="@+id/bal3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bal3"
+                            android:fontFamily="@font/lexend"
+                            android:textSize="17sp"
+                            android:layout_margin="6dp" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navbar with Shadow -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frosted_nav_bg"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/navBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="12dp"
+            android:weightSum="4">
+
+            <!-- 🏠 Home -->
+            <LinearLayout
+                android:id="@+id/homeBtnLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/home" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 💸 Transaction -->
+            <LinearLayout
+                android:id="@+id/transacBtnLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/transaction" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transaction"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 📊 Analytics -->
+            <LinearLayout
+                android:id="@+id/analyBtnLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/analysis" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Analytics"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 👤 Profile -->
+            <LinearLayout
+                android:id="@+id/profBtnLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>
