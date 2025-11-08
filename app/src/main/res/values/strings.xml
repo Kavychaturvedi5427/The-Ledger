@@ -8,7 +8,7 @@
     <string name="Welcome">Welcome to The Ledger</string>
     <string name="nameLogin">Name:</string>
     <string name="LoginSubtext">Secure PIN Login to Your Account</string>
-    <string name="PinInput">Enter 6-digit PIN</string>
+    <string name="PinInput">Enter password</string>
     <string name="loginBtn">Already a customer? \n Login</string>
     <string name="signUpBtn">New Customer? \n sign up</string>
     <string name="Forget_pintxt">Forgor your PIN? Reset Here!</string>
