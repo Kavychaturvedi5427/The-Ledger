@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#CCFFFFFF" /> <!-- semi-transparent white -->
+            <corners android:radius="25dp" />
+        </shape>
+    </item>
+
+    <!-- Soft top-to-bottom gradient for depth -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#33FFFFFF"
+                android:endColor="#11FFFFFF"
+                android:angle="90" />
+            <corners android:radius="25dp" />
+        </shape>
+    </item>
+</layer-list>
