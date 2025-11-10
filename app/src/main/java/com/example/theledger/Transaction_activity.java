@@ -115,6 +115,14 @@ public class Transaction_activity extends AppCompatActivity {
             }
         });
 
+        LinearLayout analyBtn = findViewById(R.id.analyBtnLayout);
+        analyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Transaction_activity.this, "Patience, money wizard \uD83E\uDDD9\u200D♂\uFE0F — analytics coming soon!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         LinearLayout profile = findViewById(R.id.profBtnLayout);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
