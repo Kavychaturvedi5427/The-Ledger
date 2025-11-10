@@ -86,7 +86,7 @@ Here’s a quick visual walkthrough of **The Ledger** 👇
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Login.jpg" alt="Login Screen" width="250"/></td>
 <td><img src="app/src/main/assets/Screenshots/Signup.jpg" alt="Signup Screen" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/Privacy.png" alt="Privacy Policy" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/Privacy.png" alt="Privacy And Settings Menu" width="250"/></td>
 </tr>
 </table>
 
@@ -100,7 +100,7 @@ Here’s a quick visual walkthrough of **The Ledger** 👇
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Dash.png" alt="Dashboard" width="250"/></td>
 <td><img src="app/src/main/assets/Screenshots/Addexp.jpg" alt="Add Expense Screen" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/addBAL.jpg" alt="Add Balance Screen" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/addBAl.jpg" alt="Add Balance Screen" width="250"/></td>
 </tr>
 </table>
 
@@ -108,11 +108,11 @@ Here’s a quick visual walkthrough of **The Ledger** 👇
 <table>
 <tr>
 <td align="center"><b>Transactions</b></td>
-<td align="center"><b>Profile</b></td>
+<td align="center"><b>Profile M</b></td>
 </tr>
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Txn.jpg" alt="Transactions" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/PRofile.png" alt="Profile Screen" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/PRofile.png" alt="Profile Menu" width="250"/></td>
 </tr>
 </table>
 
