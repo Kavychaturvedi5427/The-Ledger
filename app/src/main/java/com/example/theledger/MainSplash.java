@@ -58,12 +58,12 @@ public class MainSplash extends AppCompatActivity {
             startActivity(moveToMain);
 
             // use fade for smoother GPU transition instead of slide (less lag)
-            overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
-            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finishAffinity(); // ensures no residual activity in backstack
         }, 2800);
 
         // 🌓 Theme log (for debugging)
-        int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        Log.d("ThemeCheck", mode == Configuration.UI_MODE_NIGHT_YES ? "Dark mode active" : "Light mode active");
+//        int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+//        Log.d("ThemeCheck", mode == Configuration.UI_MODE_NIGHT_YES ? "Dark mode active" : "Light mode active");
     }
 }

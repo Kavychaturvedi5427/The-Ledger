@@ -70,11 +70,11 @@ public class Login extends AppCompatActivity {
 
         // Removed animations for email and password fields
         // Keep subtle animation for buttons and icons only
-        loginBtn.postDelayed(() -> loginBtn.startAnimation(fadeInSlow), 300);
-        fingerprintIcon.postDelayed(() -> fingerprintIcon.startAnimation(fadeInSlow), 400);
-        resetPassword.postDelayed(() -> resetPassword.startAnimation(fadeIn), 500);
-        redirectSignup.postDelayed(() -> redirectSignup.startAnimation(fadeIn), 600);
-        backBtn.postDelayed(() -> backBtn.startAnimation(fadeInSlow), 700);
+//        loginBtn.postDelayed(() -> loginBtn.startAnimation(fadeInSlow), 300);
+//        fingerprintIcon.postDelayed(() -> fingerprintIcon.startAnimation(fadeInSlow), 400);
+//        resetPassword.postDelayed(() -> resetPassword.startAnimation(fadeIn), 500);
+//        redirectSignup.postDelayed(() -> redirectSignup.startAnimation(fadeIn), 600);
+//        backBtn.postDelayed(() -> backBtn.startAnimation(fadeInSlow), 700);
 
         // --- Redirect to Signup ---
         redirectSignup.setOnClickListener(v -> {

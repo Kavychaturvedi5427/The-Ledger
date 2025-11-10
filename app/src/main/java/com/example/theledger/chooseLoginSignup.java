@@ -17,6 +17,9 @@ public class chooseLoginSignup extends AppCompatActivity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.choose_login_signup);
 
+        // Get the actual root ScrollView from XML
+        View root = findViewById(R.id.rootScroll);
+
         // UI elements
         ImageView logo = findViewById(R.id.mainimg);
         View appName = findViewById(R.id.appname);
@@ -25,16 +28,49 @@ public class chooseLoginSignup extends AppCompatActivity {
         AppCompatButton signup = findViewById(R.id.signupbtn);
         ImageView exit = findViewById(R.id.exit);
 
-        // Load existing animations
+        // Load animations
         Animation fadeZoom = AnimationUtils.loadAnimation(this, R.anim.fade_zoom);
         Animation fadeInSlow = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
-        // Animate logo first
+        // 🌟 Fix: Animate the real root ScrollView (not android.R.id.content)
+        root.setVisibility(View.VISIBLE);
+        root.setAlpha(0f);
+        root.animate()
+                .alpha(1f)
+                .setDuration(400)
+                .withEndAction(() ->
+                        startIntroSequence(logo, appName, tagline, login, signup, exit,
+                                fadeZoom, fadeIn, fadeInSlow))
+                .start();
+
+        // Click listeners
+        login.setOnClickListener(v -> {
+            startActivity(new Intent(this, Login.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
+
+        signup.setOnClickListener(v -> {
+            startActivity(new Intent(this, signup.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
+
+        exit.setOnClickListener(v -> {
+            finishAffinity();
+            System.exit(0);
+        });
+    }
+
+    private void startIntroSequence(
+            ImageView logo, View appName, View tagline,
+            AppCompatButton login, AppCompatButton signup, ImageView exit,
+            Animation fadeZoom, Animation fadeIn, Animation fadeInSlow) {
+
+        // Logo first
         logo.startAnimation(fadeZoom);
         logo.setVisibility(View.VISIBLE);
 
-        // Animate name + tagline slightly after logo
+        // App name + tagline
         appName.postDelayed(() -> {
             appName.startAnimation(fadeIn);
             tagline.startAnimation(fadeIn);
@@ -42,7 +78,7 @@ public class chooseLoginSignup extends AppCompatActivity {
             tagline.setVisibility(View.VISIBLE);
         }, 400);
 
-        // Animate buttons and exit last
+        // Buttons + exit last
         login.postDelayed(() -> {
             login.startAnimation(fadeInSlow);
             signup.startAnimation(fadeInSlow);
@@ -51,23 +87,5 @@ public class chooseLoginSignup extends AppCompatActivity {
             signup.setVisibility(View.VISIBLE);
             exit.setVisibility(View.VISIBLE);
         }, 800);
-
-        // Button click effects + transitions
-        login.setOnClickListener(v -> {
-            Intent move_toLogin = new Intent(chooseLoginSignup.this, Login.class);
-            startActivity(move_toLogin);
-            overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
-        });
-
-        signup.setOnClickListener(v -> {
-            Intent move_toSignup = new Intent(chooseLoginSignup.this, signup.class);
-            startActivity(move_toSignup);
-            overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out_slow);
-        });
-
-        exit.setOnClickListener(v -> {
-            finishAffinity();
-            System.exit(0);
-        });
     }
 }

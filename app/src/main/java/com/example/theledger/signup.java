@@ -70,17 +70,21 @@ public class signup extends AppCompatActivity {
         // Logo + Welcome animation
         logo.startAnimation(fadeZoom);
         welcome.startAnimation(fadeIn);
-        enter.startAnimation(fadeInSlow);
+//        enter.startAnimation(fadeInSlow);
 
         // Sequential form field animations (slight delay)
-        nameLayout.postDelayed(() -> nameLayout.startAnimation(fadeIn), 200);
-        emailLayout.postDelayed(() -> emailLayout.startAnimation(fadeIn), 300);
-        phoneLayout.postDelayed(() -> phoneLayout.startAnimation(fadeIn), 400);
-        passwordLayout.postDelayed(() -> passwordLayout.startAnimation(fadeIn), 500);
+//        nameLayout.postDelayed(() -> nameLayout.startAnimation(fadeIn), 200);
+//        emailLayout.postDelayed(() -> emailLayout.startAnimation(fadeIn), 300);
+//        phoneLayout.postDelayed(() -> phoneLayout.startAnimation(fadeIn), 400);
+//        passwordLayout.postDelayed(() -> passwordLayout.startAnimation(fadeIn), 500);
 
         // Buttons and back
-        signupBtn.postDelayed(() -> signupBtn.startAnimation(fadeInSlow), 600);
-        backBtn.postDelayed(() -> backBtn.startAnimation(fadeInSlow), 700);
+        signupBtn.postDelayed(() ->{
+            signupBtn.setVisibility(View.VISIBLE);
+            signupBtn.startAnimation(fadeInSlow);}, 150);
+        backBtn.postDelayed(() -> {
+            backBtn.setVisibility(View.VISIBLE);
+            backBtn.startAnimation(fadeInSlow);}, 150);
 
         // --- Back Button ---
         backBtn.setOnClickListener(v -> {
