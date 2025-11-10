@@ -103,11 +103,6 @@ Here’s a quick look at **The Ledger** app interface 👇
 </table>
 
 </div>
-
-> 🖼️ *All screenshots are located in:*  
-> `app/src/main/assets/Screenshots/`  
-> *Ensure the file names match exactly (case-sensitive on GitHub).*
-
 ---
 
 
