@@ -207,7 +207,8 @@
                     android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
                     android:text="Sign Up"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="invisible"/>
 
                 <!-- PROGRESS -->
                 <ProgressBar
@@ -226,7 +227,8 @@
                     android:layout_height="30dp"
                     android:layout_below="@id/signupbtn"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/back" />
+                    android:src="@drawable/back"
+                    android:visibility="invisible"/>
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

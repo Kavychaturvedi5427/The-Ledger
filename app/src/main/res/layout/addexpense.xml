@@ -74,7 +74,7 @@
                 android:layout_below="@+id/datetxt"
                 android:fontFamily="@font/lexend"
                 android:hint="Enter Date"
-                android:inputType="text"
+                android:inputType="date"
                 android:textSize="18sp" />
 
             <TextView

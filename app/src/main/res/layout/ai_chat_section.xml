@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/aiIcon"
@@ -47,6 +47,22 @@
             android:background="#F8F8F8"
             android:padding="10dp">
 
+            <!-- Scrollable chat messages -->
+            <ScrollView
+                android:id="@+id/aiScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/aiMessageContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
+            <!-- Default placeholder -->
             <TextView
                 android:id="@+id/aiPlaceholder"
                 android:layout_width="wrap_content"
@@ -55,20 +71,20 @@
                 android:text="Still broke, huh?"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:fontFamily="@font/lexend" />
+                android:fontFamily="@font/lexend"
+                android:visibility="visible" />
 
-            <ScrollView
-                android:id="@+id/aiScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never">
-
-                <LinearLayout
-                    android:id="@+id/aiMessageContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
+            <!-- Timeout or system message -->
+            <TextView
+                android:id="@+id/advicetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Timeout. Snitch to the dev in Suggestions."
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/lexend"
+                android:visibility="gone" />
         </FrameLayout>
 
         <!-- Divider -->
