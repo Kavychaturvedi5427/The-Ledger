@@ -11,7 +11,7 @@
     <string name="PinInput">Enter password</string>
     <string name="loginBtn">Already a customer? \n Login</string>
     <string name="signUpBtn">New Customer? \n sign up</string>
-    <string name="Forget_pintxt">Forgor your PIN? Reset Here!</string>
+    <string name="Forget_pintxt">Forgot your PIN? Reset Here!</string>
     <string name="new_pin">Please enter your new 6-digit PIN</string>
     <string name="ConfirmationPin">Re-enter to confirm</string>
     <string name="home">Home</string>
