@@ -54,56 +54,71 @@ It ensures **data security** with Firebase Auth and **real-time synchronization*
 
 ---
 
+---
+
 ## 📸 Screenshots
 
-Here’s a quick look at **The Ledger** app interface 👇  
+Here’s a quick visual walkthrough of **The Ledger** 👇  
 
 <div align="center">
 
 ### 🧭 App Overview
 <table>
 <tr>
-<td align="center"><b>Welcome / Main Screen</b></td>
+<td align="center"><b>Welcome Screen</b></td>
 <td align="center"><b>Choose Login / Signup</b></td>
-<td align="center"><b>Login Screen</b></td>
+<td align="center"><b>About Page</b></td>
 </tr>
 <tr>
 <td><img src="app/src/main/assets/Screenshots/main.jpg" alt="Main Screen" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/Choose.jpg" alt="Choose Screen" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/Login.jpg" alt="Login Screen" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/Choose.jpg" alt="Choose Login / Signup" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/about.png" alt="About Page" width="250"/></td>
 </tr>
 </table>
 
-### 🔐 Authentication
+### 🔐 Authentication Flow
 <table>
 <tr>
+<td align="center"><b>Login Screen</b></td>
 <td align="center"><b>Signup Screen</b></td>
-<td align="center"><b>Profile Screen</b></td>
 <td align="center"><b>Privacy Policy</b></td>
 </tr>
 <tr>
+<td><img src="app/src/main/assets/Screenshots/Login.jpg" alt="Login Screen" width="250"/></td>
 <td><img src="app/src/main/assets/Screenshots/Signup.jpg" alt="Signup Screen" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/PRofile.png" alt="Profile Screen" width="250"/></td>
 <td><img src="app/src/main/assets/Screenshots/Privacy.png" alt="Privacy Policy" width="250"/></td>
 </tr>
 </table>
 
-### 💸 Expense Tracking
+### 💸 Expense & Balance Management
 <table>
 <tr>
 <td align="center"><b>Dashboard</b></td>
-<td align="center"><b>Transactions</b></td>
-<td align="center"><b>About Screen</b></td>
+<td align="center"><b>Add Expense</b></td>
+<td align="center"><b>Add Balance</b></td>
 </tr>
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Dash.png" alt="Dashboard" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/Addexp.jpg" alt="Add Expense Screen" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/addBAL.jpg" alt="Add Balance Screen" width="250"/></td>
+</tr>
+</table>
+
+### 🧾 Transactions & Profile
+<table>
+<tr>
+<td align="center"><b>Transactions</b></td>
+<td align="center"><b>Profile</b></td>
+</tr>
+<tr>
 <td><img src="app/src/main/assets/Screenshots/Txn.jpg" alt="Transactions" width="250"/></td>
-<td><img src="app/src/main/assets/Screenshots/about.png" alt="About Screen" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/PRofile.png" alt="Profile Screen" width="250"/></td>
 </tr>
 </table>
 
 </div>
 ---
+
 
 
 ## 🛠️ Project Setup & Installation
