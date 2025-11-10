@@ -2,15 +2,16 @@ package com.example.theledger;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-
-import androidx.annotation.RequiresApi;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.biometric.BiometricPrompt;
 import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -20,10 +21,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -32,9 +29,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Privacy_BTM extends BottomSheetDialogFragment {
+
     private void deleteUserAccount(FirebaseFirestore db, FirebaseAuth auth, FirebaseUser user) {
         // Step 1: Delete Firestore data first
         db.collection("users").document(user.getUid())
@@ -46,16 +43,11 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
         user.delete()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-//                        signout after the deletion of account is successful.....
                         auth.signOut();
-
-                        // Optional: Clear local cache to force update
-                        FirebaseAuth.getInstance().getCurrentUser(); // ensures local user is null
-
+                        FirebaseAuth.getInstance().getCurrentUser(); // ensure null locally
                         Toast.makeText(getContext(), "Account deleted successfully", Toast.LENGTH_SHORT).show();
                         dismiss();
 
-//                        redirect to login activity.....
                         startActivity(new Intent(getContext(), Login.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     } else {
@@ -63,7 +55,6 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
                     }
                 });
     }
-
 
     @Nullable
     @Override
@@ -81,7 +72,6 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
                 Toast.makeText(getContext(), "User not logged in!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // Inflate custom dialog layout
             View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.biometric_dialog_box, null);
             SwitchCompat toggle = dialogView.findViewById(R.id.biometricSwitch);
 
@@ -91,8 +81,6 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
                     .setCancelable(true)
                     .create();
 
-            // Fetch current biometric status from Firestore
-            // Fetch current biometric status from Firestore
             db.collection("users").document(user.getUid()).get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
@@ -100,7 +88,6 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
                             toggle.setChecked(Boolean.TRUE.equals(biometricEnabled));
                         }
 
-                        // 🧠 Attach listener ONLY after setting initial state
                         toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
                             if (isChecked) {
                                 BiometricManager biometricManager = BiometricManager.from(getContext());
@@ -135,33 +122,25 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
                             Toast.makeText(getContext(), "Failed to load biometric state", Toast.LENGTH_SHORT).show()
                     );
 
-
             dialog.show();
         });
 
-//      -------- Privacy Policy Card ----------
+        // -------- Privacy Policy Card ----------
         CardView privacyCard = view.findViewById(R.id.privacy_policy_Card);
-        privacyCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://Kavychaturvedi5427.github.io/The-Ledger-Privacy/privacy_policy.htm";
-//               Redirecting to the privacy policy page using intent uploaded on the github pages....
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
-            }
+        privacyCard.setOnClickListener(v -> {
+            String url = "https://Kavychaturvedi5427.github.io/The-Ledger-Privacy/privacy_policy.htm";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
         });
 
-//       ------ Beta Features functionality -------
+        // ------ Beta Features functionality -------
         CardView betaFeatures = view.findViewById(R.id.beta_feature_card);
-        betaFeatures.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "❄ You’re too early. Even the devs haven’t seen these yet.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        betaFeatures.setOnClickListener(v ->
+                Toast.makeText(getContext(), "❄ You’re too early. Even the devs haven’t seen these yet.", Toast.LENGTH_SHORT).show()
+        );
 
-//        --------- Delete account --------
+        // --------- Delete account --------
         CardView delete = view.findViewById(R.id.delete_account_Card);
         delete.setOnClickListener(v -> {
             FirebaseUser user = auth.getCurrentUser();
@@ -176,35 +155,34 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
                     .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
                     .setPositiveButton("Yes", (dialogInterface, i) -> {
 
-                        // Fetch password stored in Firestore
-                        db.collection("users").document(user.getUid()).get()
-                                .addOnSuccessListener(documentSnapshot -> {
-                                    if (documentSnapshot.exists()) {
-                                        String password = documentSnapshot.getString("Pin");
-                                        String email = user.getEmail();
+                        // Show password input dialog for re-authentication
+                        View passwordView = LayoutInflater.from(getContext()).inflate(R.layout.password_confirm_dialog, null);
+                        AppCompatEditText passwordInput = passwordView.findViewById(R.id.passwordEditText);
 
-                                        if (password != null && email != null) {
-                                            // Re-authenticate user
-                                            AuthCredential credential = EmailAuthProvider.getCredential(email, password);
-                                            user.reauthenticate(credential)
-                                                    .addOnSuccessListener(aVoid -> {
-                                                        // Delete account (Firestore + Auth) in one place
-                                                        deleteUserAccount(db, auth, user);
-
-                                                    })
-                                                    .addOnFailureListener(e ->
-                                                            Toast.makeText(getContext(), "Re-authentication failed", Toast.LENGTH_SHORT).show()
-                                                    );
-                                        } else {
-                                            Toast.makeText(getContext(), "Password or email missing", Toast.LENGTH_SHORT).show();
-                                        }
-                                    } else {
-                                        Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(getContext())
+                                .setTitle("Confirm Password")
+                                .setView(passwordView)
+                                .setMessage("Please enter your password to delete your account.")
+                                .setPositiveButton("Delete", (d, i2) -> {
+                                    String password = passwordInput.getText().toString().trim();
+                                    if (password.isEmpty()) {
+                                        Toast.makeText(getContext(), "Password required", Toast.LENGTH_SHORT).show();
+                                        return;
                                     }
+
+                                    String email = user.getEmail();
+                                    if (email == null) {
+                                        Toast.makeText(getContext(), "No email found for this account.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                    AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+                                    user.reauthenticate(credential)
+                                            .addOnSuccessListener(aVoid -> deleteUserAccount(db, auth, user))
+                                            .addOnFailureListener(e -> Toast.makeText(getContext(), "Wrong password", Toast.LENGTH_SHORT).show());
                                 })
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(getContext(), "Failed to fetch user data", Toast.LENGTH_SHORT).show()
-                                );
+                                .setNegativeButton("Cancel", null)
+                                .show();
 
                     })
                     .setNegativeButton("No", null)
@@ -241,18 +219,21 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
             }
         });
 
-        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("Enable App Lock").setSubtitle("Prove you’re not an imposter to activate App Lock")
-                .setNegativeButtonText("Cancel, I like living dangerously").build();
+        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Enable App Lock")
+                .setSubtitle("Prove you’re not an imposter to activate App Lock")
+                .setNegativeButtonText("Cancel, I like living dangerously")
+                .build();
         biometricPrompt.authenticate(promptInfo);
     }
 
     private void updateFirestoreDb(String uid, boolean b) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(uid).update("Biometric Functionality", b).addOnSuccessListener(aVoid -> {
-            Toast.makeText(getContext(), "Biometric Functionality Enabled", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> {
-            Toast.makeText(getContext(), "Failed To update biometric functionality", Toast.LENGTH_SHORT).show();
-        });
+        db.collection("users").document(uid).update("Biometric Functionality", b)
+                .addOnSuccessListener(aVoid ->
+                        Toast.makeText(getContext(), "Biometric Functionality Enabled", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e ->
+                        Toast.makeText(getContext(), "Failed To update biometric functionality", Toast.LENGTH_SHORT).show());
     }
 
     private void showBiometricPromptForEnable(String uid, SwitchCompat toggle) {
@@ -298,5 +279,4 @@ public class Privacy_BTM extends BottomSheetDialogFragment {
 
         biometricPrompt.authenticate(promptInfo);
     }
-
 }
