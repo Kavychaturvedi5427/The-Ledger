@@ -110,5 +110,5 @@ Here’s a quick look at **The Ledger** app interface 👇
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/<your-username>/TheLedger.git
+git clone https://github.com/Kavychaturvedi5427/The-Ledger.git
 cd TheLedger
