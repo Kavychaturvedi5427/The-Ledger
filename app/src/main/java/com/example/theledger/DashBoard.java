@@ -56,6 +56,7 @@ public class DashBoard extends AppCompatActivity {
     private TextInputEditText aiUserInput;
     private LinearLayout aiMessageContainer;
     private ScrollView aiScrollView;
+    private TextView aiPlaceholder, advicetxt;
     private OkHttpClient client = new OkHttpClient();
 
     private FirebaseRemoteConfig firebaseRemoteConfig;
@@ -70,7 +71,14 @@ public class DashBoard extends AppCompatActivity {
         balance = findViewById(R.id.balance1);
         expense = findViewById(R.id.expensesValue);
 
-        // 🔹 UI animations
+        aiTextInputLayout = findViewById(R.id.aiTextInputLayout);
+        aiUserInput = findViewById(R.id.aiUserInput);
+        aiMessageContainer = findViewById(R.id.aiMessageContainer);
+        aiScrollView = findViewById(R.id.aiScrollView);
+        aiPlaceholder = findViewById(R.id.aiPlaceholder);
+        advicetxt = findViewById(R.id.advicetxt);
+
+        // 🔹 Animations
         Animation fadeZoom = AnimationUtils.loadAnimation(this, R.anim.fade_zoom);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         Animation fadeInSlow = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
@@ -87,16 +95,10 @@ public class DashBoard extends AppCompatActivity {
             return;
         }
 
-        // 🔹 AI Section setup
-        aiTextInputLayout = findViewById(R.id.aiTextInputLayout);
-        aiUserInput = findViewById(R.id.aiUserInput);
-        aiMessageContainer = findViewById(R.id.aiMessageContainer);
-        aiScrollView = findViewById(R.id.aiScrollView);
-
         aiTextInputLayout.setEnabled(false);
         aiTextInputLayout.setHint("Please wait for AI to initialize...");
 
-        // 🔹 Firebase Remote Config for Gemini key
+        // 🔹 Remote Config for Gemini API Key
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings =
                 new FirebaseRemoteConfigSettings.Builder()
@@ -127,7 +129,7 @@ public class DashBoard extends AppCompatActivity {
                     }
                 });
 
-        // 🔹 Reset Button
+        // 🔹 Reset
         LinearLayout reset = findViewById(R.id.resetBtn);
         reset.setOnClickListener(v -> {
             v.startAnimation(fadeIn);
@@ -154,7 +156,7 @@ public class DashBoard extends AppCompatActivity {
             no.setOnClickListener(v12 -> sure.dismiss());
         });
 
-        // 🔹 Load User Data
+        // 🔹 Load user
         db.collection("users").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
@@ -189,6 +191,13 @@ public class DashBoard extends AppCompatActivity {
             profileSheet.show(getSupportFragmentManager(), "profile_nav");
         });
 
+        analyBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashBoard.this, "Patience, money wizard \uD83E\uDDD9\u200D♂\uFE0F — analytics coming soon!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         addNavClickEffect(homeBTN);
         addNavClickEffect(transacBtn);
         addNavClickEffect(profileBTN);
@@ -202,7 +211,7 @@ public class DashBoard extends AppCompatActivity {
             navCard.animate().translationY(y > 50 ? 10 : 0).setDuration(250).start();
         });
 
-        // 🔹 AI Listener
+        // 🔹 AI Send listener
         aiTextInputLayout.setEndIconOnClickListener(v -> {
             String userMsg = aiUserInput.getText().toString().trim();
             if (userMsg.isEmpty()) return;
@@ -212,10 +221,10 @@ public class DashBoard extends AppCompatActivity {
                 return;
             }
 
-            TextView placeholder = findViewById(R.id.aiPlaceholder);
-            if (placeholder != null && placeholder.getVisibility() == View.VISIBLE)
-                placeholder.setVisibility(View.GONE);
+            if (aiPlaceholder.getVisibility() == View.VISIBLE)
+                aiPlaceholder.setVisibility(View.GONE);
 
+            advicetxt.setVisibility(View.GONE);
             addMessage("You: " + userMsg, true);
             aiUserInput.setText("");
             addTypingIndicator();
@@ -223,6 +232,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
+    // 🔹 Listen for balance/expense changes
     private void listenForBalanceAndExpenses() {
         db.collection("users").document(uid).get().addOnSuccessListener(userDoc -> {
             long resetTimestamp = 0;
@@ -257,6 +267,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
+    // 🔹 Add chat message
     private void addMessage(String text, boolean isUser) {
         TextView msgView = new TextView(this);
         msgView.setText(text);
@@ -305,6 +316,7 @@ public class DashBoard extends AppCompatActivity {
         aiScrollView.post(() -> aiScrollView.smoothScrollTo(0, aiMessageContainer.getBottom()));
     }
 
+    // 🔹 Send to Gemini
     private void sendToGemini(String userInput) {
         if (geminiApiKey.isEmpty()) {
             addMessage("AI key not loaded yet. Please wait ⏳", false);
@@ -364,13 +376,10 @@ public class DashBoard extends AppCompatActivity {
 
                             removeTypingIndicator();
                             addMessage("AI: " + reply.trim(), false);
-                            aiMessageContainer.getChildAt(aiMessageContainer.getChildCount() - 1)
-                                    .startAnimation(AnimationUtils.loadAnimation(DashBoard.this, R.anim.fade_in));
                             scrollToBottom();
 
                         } catch (JSONException e) {
                             removeTypingIndicator();
-                            Log.e("GeminiParseError", "JSON parse failed: " + e.getMessage());
                             addMessage("AI: Couldn't parse response.", false);
                         }
                     });
@@ -380,10 +389,19 @@ public class DashBoard extends AppCompatActivity {
                 public void onFailure(Call call, IOException e) {
                     runOnUiThread(() -> {
                         removeTypingIndicator();
-                        addMessage("AI failed to respond 😢 (" + e.getMessage() + ")", false);
+
+                        // Add timeout as AI message
+                        String timeoutMessage = "AI: Timeout. Snitch to the dev in Suggestions.";
+                        addMessage(timeoutMessage, false);
+
+                        // Smooth fade-in for realism
+                        aiMessageContainer.getChildAt(aiMessageContainer.getChildCount() - 1)
+                                .startAnimation(AnimationUtils.loadAnimation(DashBoard.this, R.anim.fade_in));
+
                         scrollToBottom();
                     });
                 }
+
             });
 
         } catch (JSONException e) {
@@ -408,6 +426,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
+    // 🔹 Add Balance Dialog
     private void openAddBalanceDialog() {
         Dialog addBal = new Dialog(this);
         addBal.setContentView(R.layout.addbalance);
@@ -461,6 +480,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
+    // 🔹 Add Expense Dialog
     private void openAddExpenseDialog() {
         Dialog add = new Dialog(this);
         add.setContentView(R.layout.addexpense);
@@ -470,7 +490,7 @@ public class DashBoard extends AppCompatActivity {
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         add.show();
 
-        add.findViewById(R.id.mainCard).startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
+        add.findViewById(R.id.maincard).startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
 
         AppCompatEditText amountET = add.findViewById(R.id.amntinput);
         AppCompatEditText dateET = add.findViewById(R.id.dateinput);
