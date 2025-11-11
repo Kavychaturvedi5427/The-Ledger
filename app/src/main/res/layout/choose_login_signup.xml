@@ -4,10 +4,10 @@
     android:id="@+id/rootScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:alpha="0"
     android:background="@drawable/background_gradient"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
-    android:alpha="0">
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,17 +20,27 @@
             android:id="@+id/mainCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="12dp"
-            android:background="@drawable/cards_bg"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:background="@drawable/cards_bg"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="12dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/help"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Help"
+                    android:src="@drawable/interrogation" />
 
                 <!-- 🪙 App Icon -->
                 <com.google.android.material.imageview.ShapeableImageView
@@ -81,13 +91,13 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/lavender"
+                    android:elevation="4dp"
                     android:fontFamily="@font/lexend"
+                    android:paddingVertical="8dp"
                     android:text="ALREADY A CUSTOMER?\nLOGIN"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:paddingVertical="8dp"
-                    android:elevation="4dp"
                     android:visibility="invisible" />
 
                 <!-- 🧾 Signup Button -->
@@ -99,13 +109,13 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
                     android:backgroundTint="@color/lavender"
+                    android:elevation="4dp"
                     android:fontFamily="@font/lexend"
+                    android:paddingVertical="8dp"
                     android:text="NEW CUSTOMER?\nSIGN UP"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:paddingVertical="8dp"
-                    android:elevation="4dp"
                     android:visibility="invisible" />
 
                 <!-- ❌ Exit Icon -->

@@ -27,6 +27,17 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp">
 
+                <ImageView
+                    android:id="@+id/help"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/interrogation"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Help"
+                    />
+
                 <!-- Logo -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mainimg"

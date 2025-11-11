@@ -25,15 +25,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp">
+                android:padding="20dp"
+                >
 
+                <ImageView
+                    android:id="@+id/help"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/interrogation"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Help"
+                    />
                 <!-- App Icon -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/mainimg"
                     android:layout_width="77dp"
                     android:layout_height="66dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/icon" />
+                    android:src="@drawable/icon"
+                    android:layout_below="@id/help"/>
 
                 <!-- Welcome Text -->
                 <TextView
