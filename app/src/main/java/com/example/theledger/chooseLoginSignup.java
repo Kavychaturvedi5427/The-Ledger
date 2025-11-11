@@ -1,6 +1,7 @@
 package com.example.theledger;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -87,5 +88,17 @@ public class chooseLoginSignup extends AppCompatActivity {
             signup.setVisibility(View.VISIBLE);
             exit.setVisibility(View.VISIBLE);
         }, 800);
+
+        ImageView help = findViewById(R.id.help);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] mails = {"ss3207428@gmail.com", "reportthis.kavy.dev@gmail.com"};
+                Intent sendMail = new Intent(Intent.ACTION_SENDTO);
+                sendMail.setData(Uri.parse("mailto:"));
+                sendMail.putExtra(Intent.EXTRA_EMAIL, mails);
+                startActivity(sendMail);
+            }
+        });
     }
 }

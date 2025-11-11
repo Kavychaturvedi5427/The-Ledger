@@ -108,7 +108,7 @@ public class About_app extends AppCompatActivity {
             db.collection("users").document(uid).get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            String name = documentSnapshot.getString("name");
+                            String name = documentSnapshot.getString("Name");
                             String email = documentSnapshot.getString("Email");
 
                             Map<String, Object> data = new HashMap<>();
@@ -149,8 +149,6 @@ public class About_app extends AppCompatActivity {
             }
         });
 
-
-
         ImageView back = findViewById(R.id.backBtn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,9 +156,20 @@ public class About_app extends AppCompatActivity {
                 progress.setVisibility(View.VISIBLE);
                 finish();
                 progress.setVisibility(View.GONE);
-
             }
         });
 
+//        ------- Mail Functionality (Help) --------
+        ImageView help = findViewById(R.id.help);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String []mails = {"ss3207428@gmail.com","reportthis.kavy.dev@gmail.com"};
+                Intent sendMail = new Intent(Intent.ACTION_SENDTO);
+                sendMail.setData(Uri.parse("mailto:"));
+                sendMail.putExtra(Intent.EXTRA_EMAIL, mails);
+                startActivity(sendMail);
+            }
+        });
     }
 }

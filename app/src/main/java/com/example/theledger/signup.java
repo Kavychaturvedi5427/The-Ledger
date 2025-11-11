@@ -1,11 +1,13 @@
 package com.example.theledger;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -79,12 +81,14 @@ public class signup extends AppCompatActivity {
 //        passwordLayout.postDelayed(() -> passwordLayout.startAnimation(fadeIn), 500);
 
         // Buttons and back
-        signupBtn.postDelayed(() ->{
+        signupBtn.postDelayed(() -> {
             signupBtn.setVisibility(View.VISIBLE);
-            signupBtn.startAnimation(fadeInSlow);}, 150);
+            signupBtn.startAnimation(fadeInSlow);
+        }, 150);
         backBtn.postDelayed(() -> {
             backBtn.setVisibility(View.VISIBLE);
-            backBtn.startAnimation(fadeInSlow);}, 150);
+            backBtn.startAnimation(fadeInSlow);
+        }, 150);
 
         // --- Back Button ---
         backBtn.setOnClickListener(v -> {
@@ -172,6 +176,17 @@ public class signup extends AppCompatActivity {
                         showError("Firebase ghosted you. Typical.");
                     }
                 });
+        ImageView help = findViewById(R.id.help);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] mails = {"ss3207428@gmail.com", "reportthis.kavy.dev@gmail.com"};
+                Intent sendMail = new Intent(Intent.ACTION_SENDTO);
+                sendMail.setData(Uri.parse("mailto:"));
+                sendMail.putExtra(Intent.EXTRA_EMAIL, mails);
+                startActivity(sendMail);
+            }
+        });
     }
 
     private void clearFields() {
