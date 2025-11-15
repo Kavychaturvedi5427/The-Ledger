@@ -104,14 +104,26 @@ Here’s a quick visual walkthrough of **The Ledger** 👇
 </tr>
 </table>
 
-### 🧾 Transactions & Profile
+### 🧾 Transactions & Analytics
 <table>
 <tr>
 <td align="center"><b>Transactions</b></td>
-<td align="center"><b>Profile M</b></td>
+<td align="center"><b>Analytics</b></td>
 </tr>
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Txn.jpg" alt="Transactions" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/Analytics.jpeg" alt="Analytics" width="250"/></td>
+</tr>
+</table>
+
+</div>
+
+### 🧾 Profile 
+<table>
+<tr>
+<td align="center"><b>Profile</b></td>
+</tr>
+<tr>
 <td><img src="app/src/main/assets/Screenshots/PRofile.png" alt="Profile Menu" width="250"/></td>
 </tr>
 </table>
