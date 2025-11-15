@@ -49,7 +49,7 @@ It ensures **data security** with Firebase Auth and **real-time synchronization*
 | Language | Java / Kotlin |
 | Backend | Firebase (Auth, Cloud Firestore, Remote Config) |
 | UI | XML layouts + Material Components |
-| Libraries | Glide, BiometricPrompt, AndroidX Components |
+| Libraries | Glide, BiometricPrompt, AndroidX Components, MPAndroidChart|
 | IDE | Android Studio (Arctic Fox or above) |
 
 ---
