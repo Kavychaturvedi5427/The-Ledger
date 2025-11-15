@@ -1,4 +1,4 @@
-# 💰 The Ledger — Because manually typing expenses into a spreadsheet is such a 2010 thing.
+# 💰 The Ledger — Because you deserve better than spreadsheets.
 
 **The Ledger** is a personal Android app project developed by **Kavy Chaturvedi**, designed to make expense tracking simple, secure, and intelligent. 
 It combines **Firebase Authentication**, **Cloud Firestore**, and **Firebase Remote Config** to deliver a dynamic and safe financial tracking experience — all wrapped in a modern **Material Design** interface.
