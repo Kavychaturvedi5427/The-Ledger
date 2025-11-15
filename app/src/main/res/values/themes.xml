@@ -1,4 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="BottomSheetAnimation" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+
     <style name="Theme.TheLedger" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand colors -->
