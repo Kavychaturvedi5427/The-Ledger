@@ -119,7 +119,8 @@ public class Transaction_activity extends AppCompatActivity {
         analyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Transaction_activity.this, "Patience, money wizard \uD83E\uDDD9\u200D♂\uFE0F — analytics coming soon!", Toast.LENGTH_SHORT).show();
+                Analytics_section analy = new Analytics_section();
+                analy.show(getSupportFragmentManager(), "analytics_section");
             }
         });
 
