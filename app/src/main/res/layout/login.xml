@@ -32,11 +32,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/interrogation"
                     android:clickable="true"
-                    android:focusable="true"
                     android:contentDescription="Help"
-                    />
+                    android:focusable="true"
+                    android:src="@drawable/interrogation" />
 
                 <!-- Logo -->
                 <com.google.android.material.imageview.ShapeableImageView
@@ -115,6 +114,7 @@
                         android:fontFamily="@font/lexend"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <View
                     android:id="@+id/divider3"
                     android:layout_width="match_parent"
@@ -141,9 +141,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/pintext"
+                    android:hint="Enter Password to login"
                     app:endIconMode="password_toggle"
-                    app:endIconTint="@color/black"
-                    android:hint="Enter Password to login">
+                    app:endIconTint="@color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pinInput"
@@ -153,6 +153,7 @@
                         android:inputType="textPassword"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <View
                     android:id="@+id/divider4"
                     android:layout_width="match_parent"
@@ -178,8 +179,10 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:background="@color/lavender"
+                        android:elevation="10dp"
                         android:fontFamily="@font/lexend"
-                        android:text="Login" />
+                        android:text="Login"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/fingerprintico"
@@ -230,6 +233,39 @@
                     android:layout_below="@id/redirectSignup"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/back" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/back_btn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/privacy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/lexend"
+                        android:text="Privacy Policy"
+                        android:textColor="#7c5df8"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/terms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:text=" | Terms "
+                        android:textColor="#7c5df8"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <!-- Progress Indicator -->
                 <ProgressBar

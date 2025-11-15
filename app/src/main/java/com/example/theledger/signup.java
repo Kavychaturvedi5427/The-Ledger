@@ -180,11 +180,10 @@ public class signup extends AppCompatActivity {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] mails = {"ss3207428@gmail.com", "reportthis.kavy.dev@gmail.com"};
-                Intent sendMail = new Intent(Intent.ACTION_SENDTO);
-                sendMail.setData(Uri.parse("mailto:"));
-                sendMail.putExtra(Intent.EXTRA_EMAIL, mails);
-                startActivity(sendMail);
+                String url = "https://Kavychaturvedi5427.github.io/The-Ledger-Privacy/help_desk.htm";
+                Intent sendmail = new Intent(Intent.ACTION_VIEW);
+                sendmail.setData(Uri.parse(url));
+                startActivity(sendmail);
             }
         });
     }

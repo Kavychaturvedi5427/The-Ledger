@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 
 public class chooseLoginSignup extends AppCompatActivity {
 
@@ -20,6 +21,9 @@ public class chooseLoginSignup extends AppCompatActivity {
 
         // Get the actual root ScrollView from XML
         View root = findViewById(R.id.rootScroll);
+
+        CardView mainCard = findViewById(R.id.mainCard);
+        mainCard.setVisibility(View.VISIBLE);
 
         // UI elements
         ImageView logo = findViewById(R.id.mainimg);
@@ -93,11 +97,10 @@ public class chooseLoginSignup extends AppCompatActivity {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] mails = {"ss3207428@gmail.com", "reportthis.kavy.dev@gmail.com"};
-                Intent sendMail = new Intent(Intent.ACTION_SENDTO);
-                sendMail.setData(Uri.parse("mailto:"));
-                sendMail.putExtra(Intent.EXTRA_EMAIL, mails);
-                startActivity(sendMail);
+                String url = "https://Kavychaturvedi5427.github.io/The-Ledger-Privacy/help_desk.htm";
+                Intent sendmail = new Intent(Intent.ACTION_VIEW);
+                sendmail.setData(Uri.parse(url));
+                startActivity(sendmail);
             }
         });
     }

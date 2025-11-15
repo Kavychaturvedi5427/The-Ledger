@@ -32,6 +32,19 @@ import java.util.concurrent.Executor;
 
 public class Privacy_BTM extends BottomSheetDialogFragment {
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        View bottomSheet = getDialog().findViewById(
+                com.google.android.material.R.id.design_bottom_sheet
+        );
+
+        if (bottomSheet != null) {
+            bottomSheet.setBackgroundResource(R.drawable.bottomsheet_bg);
+        }
+    }
+
     private void deleteUserAccount(FirebaseFirestore db, FirebaseAuth auth, FirebaseUser user) {
         // Step 1: Delete Firestore data first
         db.collection("users").document(user.getUid())

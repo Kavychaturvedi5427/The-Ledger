@@ -25,7 +25,9 @@
             android:animateLayoutChanges="true"
             android:background="@drawable/cards_bg"
             app:cardCornerRadius="20dp"
-            app:cardElevation="12dp">
+            app:cardElevation="12dp"
+            android:visibility="invisible"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -86,30 +88,33 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/loginBTN"
                     android:layout_width="180dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_below="@id/appTagline"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/lavender"
-                    android:elevation="4dp"
+                    android:elevation="10dp"
+                    android:textStyle="bold"
                     android:fontFamily="@font/lexend"
                     android:paddingVertical="8dp"
                     android:text="ALREADY A CUSTOMER?\nLOGIN"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    />
 
                 <!-- 🧾 Signup Button -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/signupbtn"
                     android:layout_width="180dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_below="@id/loginBTN"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
                     android:backgroundTint="@color/lavender"
-                    android:elevation="4dp"
+                    android:elevation="10dp"
+                    android:textStyle="bold"
                     android:fontFamily="@font/lexend"
                     android:paddingVertical="8dp"
                     android:text="NEW CUSTOMER?\nSIGN UP"

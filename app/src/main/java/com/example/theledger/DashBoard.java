@@ -1,5 +1,6 @@
 package com.example.theledger;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,7 +79,7 @@ public class DashBoard extends AppCompatActivity {
         aiPlaceholder = findViewById(R.id.aiPlaceholder);
         advicetxt = findViewById(R.id.advicetxt);
 
-        // 🔹 Animations
+        // Animations
         Animation fadeZoom = AnimationUtils.loadAnimation(this, R.anim.fade_zoom);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         Animation fadeInSlow = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
@@ -98,7 +99,7 @@ public class DashBoard extends AppCompatActivity {
         aiTextInputLayout.setEnabled(false);
         aiTextInputLayout.setHint("Please wait for AI to initialize...");
 
-        // 🔹 Remote Config for Gemini API Key
+        //  Remote Config for Gemini API Key
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings =
                 new FirebaseRemoteConfigSettings.Builder()
@@ -129,7 +130,7 @@ public class DashBoard extends AppCompatActivity {
                     }
                 });
 
-        // 🔹 Reset
+        //  Reset
         LinearLayout reset = findViewById(R.id.resetBtn);
         reset.setOnClickListener(v -> {
             v.startAnimation(fadeIn);
@@ -156,7 +157,7 @@ public class DashBoard extends AppCompatActivity {
             no.setOnClickListener(v12 -> sure.dismiss());
         });
 
-        // 🔹 Load user
+        //  Load user
         db.collection("users").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
@@ -175,7 +176,7 @@ public class DashBoard extends AppCompatActivity {
                     }
                 });
 
-        // 🔹 Navbar
+        //  Navbar
         LinearLayout homeBTN = findViewById(R.id.homeBtnLayout);
         LinearLayout transacBtn = findViewById(R.id.transacBtnLayout);
         LinearLayout profileBTN = findViewById(R.id.profBtnLayout);
@@ -194,7 +195,8 @@ public class DashBoard extends AppCompatActivity {
         analyBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DashBoard.this, "Patience, money wizard \uD83E\uDDD9\u200D♂\uFE0F — analytics coming soon!", Toast.LENGTH_SHORT).show();
+                Analytics_section analy = new Analytics_section();
+                analy.show(getSupportFragmentManager(), "analytics_section");
             }
         });
 
@@ -203,7 +205,7 @@ public class DashBoard extends AppCompatActivity {
         addNavClickEffect(profileBTN);
         addNavClickEffect(analyBTN);
 
-        // 🔹 Scroll navbar animation
+        // Scroll navbar animation
         ScrollView scrollView = findViewById(R.id.mainScroll);
         View navCard = findViewById(R.id.navigationCard);
         scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
@@ -211,7 +213,7 @@ public class DashBoard extends AppCompatActivity {
             navCard.animate().translationY(y > 50 ? 10 : 0).setDuration(250).start();
         });
 
-        // 🔹 AI Send listener
+        //  AI Send listener
         aiTextInputLayout.setEndIconOnClickListener(v -> {
             String userMsg = aiUserInput.getText().toString().trim();
             if (userMsg.isEmpty()) return;
@@ -232,7 +234,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
-    // 🔹 Listen for balance/expense changes
+    //  Listen for balance/expense changes
     private void listenForBalanceAndExpenses() {
         db.collection("users").document(uid).get().addOnSuccessListener(userDoc -> {
             long resetTimestamp = 0;
@@ -267,7 +269,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
-    // 🔹 Add chat message
+    //  Add chat message
     private void addMessage(String text, boolean isUser) {
         TextView msgView = new TextView(this);
         msgView.setText(text);
@@ -411,6 +413,7 @@ public class DashBoard extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void addNavClickEffect(LinearLayout layout) {
         layout.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
@@ -426,7 +429,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
-    // 🔹 Add Balance Dialog
+    //  Add Balance Dialog
     private void openAddBalanceDialog() {
         Dialog addBal = new Dialog(this);
         addBal.setContentView(R.layout.addbalance);
@@ -480,7 +483,7 @@ public class DashBoard extends AppCompatActivity {
         });
     }
 
-    // 🔹 Add Expense Dialog
+    //  Add Expense Dialog
     private void openAddExpenseDialog() {
         Dialog add = new Dialog(this);
         add.setContentView(R.layout.addexpense);
