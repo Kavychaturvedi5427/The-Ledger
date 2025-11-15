@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:overScrollMode="always">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/bottomSheetDragHandleView"
+                android:layout_width="36dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.SmallComponent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/Expend_lottie"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/data"
+                app:lottie_repeatMode="reverse" />
+
+            <TextView
+                android:id="@+id/mainHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/lexend"
+                android:text="Spending Analytics"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/cavet"
+                android:text="Because apparently users care"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/div1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/gray" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/bar_lottie"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/bar" />
+
+            <!-- PIE CHART CARD -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chartCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/chartTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/lexend"
+                        android:text="Visual evidence of bad decisions"
+                        android:textColor="#555555"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"/>
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Spending Amount -->
+            <TextView
+                android:id="@+id/Exp_amt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/lexend"
+                android:text="Spending amount"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/amt_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/lexend"
+                android:text="It’s worse than you think."
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/gray" />
+
+            <!-- Percentage Breakdown Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/percent_breakdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/percent_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Where most of your money went"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/lexend"/>
+
+                    <TextView
+                        android:id="@+id/percent_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Percentage-wise damage report"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/lexend"/>
+
+                    <TextView
+                        android:id="@+id/cat1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food — 0%"
+                        android:textSize="14sp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lexend"/>
+
+                    <TextView
+                        android:id="@+id/cat2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Travel — 0%"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lexend"/>
+
+                    <TextView
+                        android:id="@+id/cat3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shopping — 0%"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lexend"/>
+
+                    <TextView
+                        android:id="@+id/cat4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Others — 0%"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lexend"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/div3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/gray"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@color/lavender"
+                android:text="➡ Tap to see exactly how you went broke."
+                android:padding="4dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/lexend"/>
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:contentDescription="Back"
+                android:clickable="true"
+                android:focusable="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/cavet"
+                android:text="Broke today, broke tomorrow."
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>
