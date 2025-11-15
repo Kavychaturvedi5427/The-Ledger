@@ -44,7 +44,7 @@
                 android:fontFamily="@font/lexend"
                 android:text="Welcome, User!"
                 android:textColor="@color/black"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <!-- 💰 Balance and Expense -->
             <LinearLayout
@@ -69,7 +69,7 @@
                         android:fontFamily="@font/lexend"
                         android:text="Your Balance"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/balance1"
@@ -103,7 +103,7 @@
                         android:fontFamily="@font/lexend"
                         android:text="Expenses"
                         android:textColor="@color/black"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/expensesValue"

@@ -169,4 +169,17 @@ public class Profile_nav extends BottomSheetDialogFragment {
 
         return view;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        View bottomSheet = getDialog().findViewById(
+                com.google.android.material.R.id.design_bottom_sheet
+        );
+
+        if (bottomSheet != null) {
+            bottomSheet.setBackgroundResource(R.drawable.bottomsheet_bg);
+        }
+    }
+
 }

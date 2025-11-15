@@ -5,9 +5,8 @@
     android:id="@+id/mainCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="7dp">
+    android:background="@android:color/transparent"
+    app:cardElevation="0dp">
 
     <!-- Scrollable content -->
     <androidx.core.widget.NestedScrollView
