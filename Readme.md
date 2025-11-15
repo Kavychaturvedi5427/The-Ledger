@@ -29,9 +29,11 @@ It ensures **data security** with Firebase Auth and **real-time synchronization*
 - AI-based personalization and configuration fetched securely from Firebase 
 - Allows controlled feature rollouts (e.g., beta features, recommendations)
 
-### 📊 Expense Analysis *(Coming Soon 🚧)*
-- Visual analytics and monthly spending summaries 
-- Smart budget insights and data-driven suggestions 
+### 📊 Expense Analysis 
+- Pie chart visualization of expenses
+- Category-wise breakdown for quick insights
+- Monthly summaries auto-generated
+- Smooth UI using MPAndroidChart / Custom Graph
 
 ### 🌙 User Interface
 - Clean **Material UI** using AppCompat, CardView & ConstraintLayout 
