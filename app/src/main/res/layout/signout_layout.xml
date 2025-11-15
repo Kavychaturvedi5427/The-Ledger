@@ -55,6 +55,8 @@
                     android:fontFamily="@font/lexend"
                     android:layout_marginTop="5dp"
                     android:padding="5dp"
+                    android:elevation="10dp"
+                    android:textStyle="bold"
                     />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/YesBtn"
@@ -64,6 +66,8 @@
                     android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
                     android:layout_marginTop="5dp"
+                    android:elevation="10dp"
+                    android:textStyle="bold"
                     android:padding="5dp"
                     />
             </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:padding="5dp"
+    android:padding="2dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="9dp">
 
@@ -207,7 +207,9 @@
                 android:fontFamily="@font/lexend"
                 android:padding="5dp"
                 android:text="Save Changes"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:elevation="10dp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
     </ScrollView>

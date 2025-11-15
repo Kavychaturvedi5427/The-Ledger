@@ -93,7 +93,9 @@
                     android:layout_margin="5dp"
                     android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
-                    android:text="Cancel" />
+                    android:text="Cancel"
+                    android:elevation="10dp"
+                    android:textStyle="bold"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/add"
@@ -102,7 +104,9 @@
                     android:layout_margin="5dp"
                     android:background="@color/lavender"
                     android:fontFamily="@font/lexend"
-                    android:text="Add" />
+                    android:text="Add"
+                    android:elevation="10dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </RelativeLayout>
