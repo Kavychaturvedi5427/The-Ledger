@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/navbarShadowContainer"
+        android:layout_above="@id/navBarContainer"
         android:fillViewport="true">
 
         <LinearLayout
@@ -18,6 +18,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
+            
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                app:lottie_rawRes="@raw/finance"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_repeatMode="reverse"
+                />
 
             <!-- 🧾 TRANSACTIONS CARD -->
             <androidx.cardview.widget.CardView
@@ -49,10 +58,9 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_toEndOf="@id/mainHeadtxn"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="15dp"
-                        android:src="@drawable/transacanim"
-                        />
+                        android:layout_alignTop="@id/mainHeadtxn"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/transacanim" />
 
                     <TextView
                         android:id="@+id/subHeadtxn"
@@ -116,6 +124,7 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
+
             <!-- 💵 BALANCE CARD -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/balance_card"
@@ -142,12 +151,13 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
+                    <!-- FIXED: the image was wrongly referencing @id/subHead -->
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_toEndOf="@id/subHead"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="15dp"
+                        android:layout_alignTop="@id/mainHead"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/balance" />
 
                     <TextView
@@ -212,17 +222,27 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full history coming next update. Try not to panic."
+                android:fontFamily="@font/lexend"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                />
+
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navbar with Shadow -->
+    <!-- Bottom Navbar Container -->
     <FrameLayout
+        android:id="@+id/navBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/frosted_nav_bg"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        >
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:id="@+id/navBar"
