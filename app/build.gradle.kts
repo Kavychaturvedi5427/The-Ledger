@@ -34,21 +34,22 @@ android {
 }
 
 dependencies {
-    implementation("com.airbnb.android:lottie:6.6.10")
+    implementation("com.airbnb.android:lottie:6.7.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:5.3.0")
     implementation("org.json:json:20231013")
     implementation("com.google.firebase:firebase-config")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 
 }
