@@ -1,4 +1,4 @@
-package com.example.theledger;
+package com.kavya.theledger;
 
 import android.content.Intent;
 import android.graphics.Color;

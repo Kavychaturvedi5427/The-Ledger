@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.theledger">
+    package="com.kavya.theledger">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 <!--    Taking permission to use biometric functionality ...... -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="remove" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +24,7 @@
         >
 
         <!--        Splash activity decalration .....-->
-        <activity android:name=".MainSplash"
+        <activity android:name="com.kavya.theledger.MainSplash"
             android:exported="true"
             android:theme="@style/theme.splash">
             <!--            This is the main activity-->
@@ -33,7 +36,7 @@
         </activity>
 
         <!--        Signup activity Declaration.......-->
-        <activity android:name=".signup"
+        <activity android:name="com.kavya.theledger.signup"
             android:exported="true">
             <!--             now this is not the main activity-->
             <!--            <intent-filter>-->
@@ -43,23 +46,23 @@
         </activity>
 
         <!--        Choose activity Declaration.......-->
-        <activity android:name=".chooseLoginSignup"
+        <activity android:name="com.kavya.theledger.chooseLoginSignup"
             android:exported="true"/>
 
         <!--        Login Activity Declaration.......-->
-        <activity android:name=".Login"
+        <activity android:name="com.kavya.theledger.Login"
             android:exported="true"
             />
 
         <!--    DashBoard activity Declaration........-->
-        <activity android:name=".DashBoard"
+        <activity android:name="com.kavya.theledger.DashBoard"
             android:exported="true"
             />
-        <activity android:name=".About_app"
+        <activity android:name="com.kavya.theledger.About_app"
             android:exported="true"
             />
 
-        <activity android:name=".Transaction_activity"
+        <activity android:name="com.kavya.theledger.Transaction_activity"
             android:exported="true"/>
 
     </application>

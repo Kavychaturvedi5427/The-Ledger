@@ -1,10 +1,6 @@
-package com.example.theledger;
+package com.kavya.theledger;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.InetAddresses;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +15,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 

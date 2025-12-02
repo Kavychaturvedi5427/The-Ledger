@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.theledger"
+    namespace = "com.kavya.theledger"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.theledger"
+        applicationId = "com.kavya.theledger"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
