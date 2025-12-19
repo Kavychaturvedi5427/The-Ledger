@@ -65,6 +65,9 @@
         <activity android:name="com.kavya.theledger.Transaction_activity"
             android:exported="true"/>
 
+        <activity android:name="com.kavya.theledger.RecyclerMain"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

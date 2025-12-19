@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,6 +22,7 @@ public class Transaction_activity extends AppCompatActivity {
     String uid;
 
     TextView txn1, txn2, txn3, bal1, bal2, bal3;
+    CardView transac_card, Balance_card;
 
     protected void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
@@ -34,6 +36,9 @@ public class Transaction_activity extends AppCompatActivity {
         bal2 = findViewById(R.id.bal2);
         bal3 = findViewById(R.id.bal3);
 
+        transac_card = findViewById(R.id.Trasac_card);
+        Balance_card = findViewById(R.id.balance_card);
+
 //      ------ clearing old text from the textviews ------
         txn1.setText("");
         txn2.setText("");
@@ -41,7 +46,6 @@ public class Transaction_activity extends AppCompatActivity {
         bal1.setText("");
         bal2.setText("");
         bal3.setText("");
-
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -54,7 +58,7 @@ public class Transaction_activity extends AppCompatActivity {
 
 //      ------ fetching last 3 transactions from the db -------
         db.collection("users").document(uid).collection("transactions")
-                .orderBy("Date", Query.Direction.DESCENDING).limit(3)
+                .orderBy("Timestamp", Query.Direction.DESCENDING).limit(3)
                 .get().addOnSuccessListener(queryDocumentSnapshots -> {
                     if (queryDocumentSnapshots.isEmpty()) {
                         Toast.makeText(this, "Zero transactions. You’re really saving the economy.", Toast.LENGTH_SHORT).show();
@@ -133,5 +137,21 @@ public class Transaction_activity extends AppCompatActivity {
                 prof.show(getSupportFragmentManager(), "profile_nav");
             }
         });
+
+        transac_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Transaction_activity.this, RecyclerMain.class);
+                startActivity(intent);
+            }
+        });
+
+//        Balance_card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
     }
 }

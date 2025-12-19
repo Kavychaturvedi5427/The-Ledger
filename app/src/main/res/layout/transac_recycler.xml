@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="9dp"
+    android:id="@+id/mainCard"
+    android:layout_margin="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/expenseIco"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/expenses"
+            android:contentDescription="@string/expensesicon"
+            android:layout_marginStart="15dp"
+            />
+
+        <TextView
+            android:id="@+id/amnt_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:text="Amount"
+            android:fontFamily="@font/lexend"
+            android:textSize="20sp"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
