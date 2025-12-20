@@ -28,12 +28,24 @@
                 android:background="@color/gray"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.SmallComponent" />
 
+            <ImageView
+                android:id="@+id/resetBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                android:src="@drawable/resetanalysis"
+                android:layout_margin="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                />
+
+
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/Expend_lottie"
                 android:layout_width="150dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/data"
