@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/lexend"
-                android:text="v1.0.0"
+                android:text="v1.1.0"
                 android:textSize="12sp" />
 
             <TextView

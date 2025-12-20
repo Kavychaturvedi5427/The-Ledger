@@ -461,7 +461,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/lexend"
-                android:text=" v1.0.0 "
+                android:text=" v1.1.0 "
                 android:textSize="15sp" />
 
         </RelativeLayout>
