@@ -19,6 +19,17 @@
             android:layout_height="match_parent"
             android:padding="10dp">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/expenseLottie"
+                app:lottie_rawRes="@raw/addexpense"
+                android:layout_centerHorizontal="true"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:layout_marginBottom="10dp"
+                />
+
             <TextView
                 android:id="@+id/addtext"
                 android:layout_width="wrap_content"
@@ -26,6 +37,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/lexend"
                 android:text="Add Expenses"
+                android:layout_below="@id/expenseLottie"
                 android:textSize="30sp" />
 
             <View
