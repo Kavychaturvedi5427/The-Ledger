@@ -146,8 +146,8 @@ public class DashBoard extends AppCompatActivity {
                 db.collection("users").document(uid)
                         .update("Balance", 0, "Expense", 0, "ResetTimestamp", FieldValue.serverTimestamp())
                         .addOnSuccessListener(aVoid -> {
-                            balance.setText("0");
-                            expense.setText("0");
+                            balance.setText("₹0");
+                            expense.setText("₹0");
                             Toast.makeText(DashBoard.this, "All data reset successfully", Toast.LENGTH_SHORT).show();
                             sure.dismiss();
                         })
@@ -256,14 +256,14 @@ public class DashBoard extends AppCompatActivity {
                                     doc.getTimestamp("Timestamp").toDate().getTime() > finalResetTimestamp)
                                 totalExpense += amnt;
                         }
-                        expense.setText(String.valueOf(totalExpense));
+                        expense.setText("₹" + String.valueOf(totalExpense));
                     });
 
             db.collection("users").document(uid)
                     .addSnapshotListener((snapshot, e) -> {
                         if (snapshot != null && snapshot.exists()) {
                             String bal = snapshot.get("Balance") != null ? String.valueOf(snapshot.get("Balance")) : "0";
-                            balance.setText(bal);
+                            balance.setText("₹" +bal);
                         }
                     });
         });
