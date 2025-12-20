@@ -20,11 +20,12 @@
 
         <ImageView
             android:id="@+id/expenseIco"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/expenses"
             android:contentDescription="@string/expensesicon"
             android:layout_marginStart="15dp"
+            android:layout_gravity="center"
             />
 
         <TextView
@@ -34,7 +35,7 @@
             android:layout_marginStart="25dp"
             android:text="Amount"
             android:fontFamily="@font/lexend"
-            android:textSize="20sp"
+            android:textSize="18sp"
             />
 
 
