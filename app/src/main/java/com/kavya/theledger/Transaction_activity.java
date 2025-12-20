@@ -24,6 +24,10 @@ public class Transaction_activity extends AppCompatActivity {
     TextView txn1, txn2, txn3, bal1, bal2, bal3;
     CardView transac_card, Balance_card;
 
+    public static final String EXTRA_MODE = "mode";
+    public static final int MODE_TRANSACTIONS = 0;
+    public static final int MODE_BALANCE = 1;
+
     protected void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_transac);
@@ -57,48 +61,45 @@ public class Transaction_activity extends AppCompatActivity {
 
 
 //      ------ fetching last 3 transactions from the db -------
-        db.collection("users").document(uid).collection("transactions")
-                .orderBy("Timestamp", Query.Direction.DESCENDING).limit(3)
-                .get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        Toast.makeText(this, "Zero transactions. You’re really saving the economy.", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    int i = 1;
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        String Category = doc.getString("Description");
-                        Double amount = doc.getDouble("Amount");
-                        String date = doc.getString("Date");
-                        String formatted = Category + " | ₹" + amount + " | " + date;
-                        if (i == 1) txn1.setText(formatted);
-                        else if (i == 2) txn2.setText(formatted);
-                        else if (i == 3) txn3.setText(formatted);
-                        i++;
-                    }
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(this, "Wow. Firebase decided to nap again.", Toast.LENGTH_SHORT).show();
-                });
+        db.collection("users").document(uid).collection("transactions").orderBy("Timestamp", Query.Direction.DESCENDING).limit(3).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            if (queryDocumentSnapshots.isEmpty()) {
+                Toast.makeText(this, "Zero transactions. You’re really saving the economy.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            int i = 1;
+            for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                String Category = doc.getString("Description");
+                Double amount = doc.getDouble("Amount");
+                String date = doc.getString("Date");
+                String formatted = Category + " | ₹" + amount + " | " + date;
+                if (i == 1) txn1.setText(formatted);
+                else if (i == 2) txn2.setText(formatted);
+                else if (i == 3) txn3.setText(formatted);
+                i++;
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Wow. Firebase decided to nap again.", Toast.LENGTH_SHORT).show();
+        });
 
 //        ----- Fetching last 3 balance top ups ------
-        db.collection("users").document(uid).collection("BalanceManagement").orderBy("Date", Query.Direction.DESCENDING).limit(3)
-                .get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        Toast.makeText(this, "Empty wallet detected. Classic.", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    int i = 1;
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        Double amount = doc.getDouble("Amount");
-                        String date = doc.getString("Date");
-                        String formatted = "₹" + amount + " | " + date;
-                        if (i == 1) bal1.setText(formatted);
-                        else if (i == 2) bal2.setText(formatted);
-                        else if (i == 3) bal3.setText(formatted);
-                        i++;
-                    }
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(this, "Oops. That wasn’t supposed to happen... probably.", Toast.LENGTH_SHORT).show();
-                });
+        db.collection("users").document(uid).collection("BalanceManagement").orderBy("Date", Query.Direction.ASCENDING).limit(3).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            if (queryDocumentSnapshots.isEmpty()) {
+                Toast.makeText(this, "Empty wallet detected. Classic.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            int i = 1;
+            for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                Double amount = doc.getDouble("Amount");
+                String date = doc.getString("Date");
+                String formatted = "₹" + amount + " | " + date;
+                if (i == 1) bal1.setText(formatted);
+                else if (i == 2) bal2.setText(formatted);
+                else if (i == 3) bal3.setText(formatted);
+                i++;
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Oops. That wasn’t supposed to happen... probably.", Toast.LENGTH_SHORT).show();
+        });
 
 //        ----- Navbar Functionalities ------
         LinearLayout home = findViewById(R.id.homeBtnLayout);
@@ -110,7 +111,7 @@ public class Transaction_activity extends AppCompatActivity {
                 finish();
             }
         });
-        
+
         LinearLayout transacBtn = findViewById(R.id.transacBtnLayout);
         transacBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,16 +143,19 @@ public class Transaction_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Transaction_activity.this, RecyclerMain.class);
+                intent.putExtra(EXTRA_MODE, MODE_TRANSACTIONS);
                 startActivity(intent);
             }
         });
 
-//        Balance_card.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        Balance_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Transaction_activity.this, RecyclerMain.class);
+                intent.putExtra(EXTRA_MODE, MODE_BALANCE);
+                startActivity(intent);
+            }
+        });
 
     }
 }

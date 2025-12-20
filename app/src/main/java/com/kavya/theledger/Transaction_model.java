@@ -10,6 +10,10 @@ public class Transaction_model {
         this.Date = Date;
         this.Description = Desc;
     }
+    public Transaction_model(int amnt, String Date){
+        this.Amount = amnt;
+        this.Date = Date;
+    }
 
     public Transaction_model(){}
 
