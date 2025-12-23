@@ -32,7 +32,6 @@ It ensures **data security** with Firebase Auth and **real-time synchronization*
 ### 📊 Expense Analysis 
 - Pie chart visualization of expenses
 - Category-wise breakdown for quick insights
-- Monthly summaries auto-generated
 - Smooth UI using MPAndroidChart / Custom Graph
 
 ### 🌙 User Interface
