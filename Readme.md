@@ -115,6 +115,7 @@ Here’s a quick visual walkthrough of **The Ledger** 👇  
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Txn.jpg" alt="Transactions" width="250"/></td>
 <td><img src="app/src/main/assets/Screenshots/Analytics.jpeg" alt="Analytics" width="250"/></td>
+<td><img src="app/src/main/assets/Screenshots/Payments_btm.jpeg" alt="Payments" width="250"/></td>
 </tr>
 </table>
 
