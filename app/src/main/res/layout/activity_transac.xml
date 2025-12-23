@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/navBarContainer"
+        android:layout_above="@id/navbarContainer"
         android:fillViewport="true">
 
         <LinearLayout
@@ -236,120 +236,166 @@
     </ScrollView>
 
     <!-- Bottom Navbar Container -->
-    <FrameLayout
-        android:id="@+id/navBarContainer"
+    <RelativeLayout
+        android:id="@+id/navbarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/frosted_nav_bg"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp">
+        android:layout_margin="14dp">
 
-        <LinearLayout
-            android:id="@+id/navBar"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/navigationCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="12dp"
-            android:weightSum="4">
+            app:cardCornerRadius="26dp"
+            app:cardElevation="18dp"
+            app:cardBackgroundColor="@android:color/transparent">
 
-            <!-- 🏠 Home -->
-            <LinearLayout
-                android:id="@+id/homeBtnLayout"
-                android:layout_width="0dp"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
+                android:background="@drawable/frosted_nav_bg">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/home" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- ONLY THIS SCROLLS -->
+                <HorizontalScrollView
+                    android:id="@+id/navbarscroller"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Home"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                    android:scrollbars="none"
+                    android:overScrollMode="never"
+                    android:fillViewport="false">
 
-            <!-- 💸 Transaction -->
-            <LinearLayout
-                android:id="@+id/transacBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
+                    <LinearLayout
+                        android:id="@+id/navBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="12dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/transaction" />
+                        <!-- Home -->
+                        <LinearLayout
+                            android:id="@+id/homeBtnLayout"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:clickable="true"
+                            android:focusable="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Transaction"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/home" />
 
-            <!-- 📊 Analytics -->
-            <LinearLayout
-                android:id="@+id/analyBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Home"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/analysis" />
+                        <!-- Transaction -->
+                        <LinearLayout
+                            android:id="@+id/transacBtnLayout"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:clickable="true"
+                            android:focusable="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Analytics"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/transaction" />
 
-            <!-- 👤 Profile -->
-            <LinearLayout
-                android:id="@+id/profBtnLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Transaction"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/user" />
+                        <!-- Analytics -->
+                        <LinearLayout
+                            android:id="@+id/analyBtnLayout"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:clickable="true"
+                            android:focusable="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Profile"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </FrameLayout>
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/analysis" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Analytics"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/paymentBtnLay"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/payment" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Payment"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Profile -->
+                        <LinearLayout
+                            android:id="@+id/profileBtnLayout"
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/user" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Profile"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </RelativeLayout>
