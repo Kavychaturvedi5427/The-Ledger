@@ -179,8 +179,9 @@ public class DashBoard extends AppCompatActivity {
         //  Navbar
         LinearLayout homeBTN = findViewById(R.id.homeBtnLayout);
         LinearLayout transacBtn = findViewById(R.id.transacBtnLayout);
-        LinearLayout profileBTN = findViewById(R.id.profBtnLayout);
+        LinearLayout profileBTN = findViewById(R.id.profileBtnLayout);
         LinearLayout analyBTN = findViewById(R.id.analyBtnLayout);
+        LinearLayout paymentBtn = findViewById(R.id.paymentBtnLay);
 
         homeBTN.setOnClickListener(v -> Toast.makeText(this, "Already on Home 🏠", Toast.LENGTH_SHORT).show());
         transacBtn.setOnClickListener(v -> {
@@ -200,10 +201,20 @@ public class DashBoard extends AppCompatActivity {
             }
         });
 
+        paymentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Payment_btm payment = new Payment_btm();
+                payment.show(getSupportFragmentManager(),"payment_btm");
+            }
+        });
+
+
         addNavClickEffect(homeBTN);
         addNavClickEffect(transacBtn);
         addNavClickEffect(profileBTN);
         addNavClickEffect(analyBTN);
+        addNavClickEffect(profileBTN);
 
         // Scroll navbar animation
         ScrollView scrollView = findViewById(R.id.mainScroll);

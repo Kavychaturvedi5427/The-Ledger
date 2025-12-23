@@ -129,13 +129,22 @@ public class Transaction_activity extends AppCompatActivity {
             }
         });
 
-        LinearLayout profile = findViewById(R.id.profBtnLayout);
+        LinearLayout profile = findViewById(R.id.profileBtnLayout);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                for opening BottomSheetDialogFragment
                 Profile_nav prof = new Profile_nav();
                 prof.show(getSupportFragmentManager(), "profile_nav");
+            }
+        });
+
+        LinearLayout payment = findViewById(R.id.paymentBtnLay);
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Payment_btm payment = new Payment_btm();
+                payment.show(getSupportFragmentManager(),"payment_btm");
             }
         });
 
