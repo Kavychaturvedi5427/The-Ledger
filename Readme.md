@@ -110,6 +110,7 @@ Here’s a quick visual walkthrough of **The Ledger** 👇  
 <tr>
 <td align="center"><b>Transactions</b></td>
 <td align="center"><b>Analytics</b></td>
+  <td align="center"><b>Payments</b></td>
 </tr>
 <tr>
 <td><img src="app/src/main/assets/Screenshots/Txn.jpg" alt="Transactions" width="250"/></td>
